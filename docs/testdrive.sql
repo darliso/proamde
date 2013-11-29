@@ -1,0 +1,24 @@
+DROP TABLE IF EXISTS "tbl_pessoa";
+CREATE TABLE tbl_pessoa (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT ,
+  nome VARCHAR(250) NOT NULL ,
+  cpf INTEGER NOT NULL ,
+  data_de_nascimento DATE NOT NULL ,
+  rg INTEGER NOT NULL ,
+  genero VARCHAR(45) NOT NULL ,
+  naturalidade VARCHAR(45) NOT NULL ,
+  endereco VARCHAR(250) NOT NULL ,
+  cep INTEGER NOT NULL ,
+  telefone VARCHAR(45) NULL ,
+  celular VARCHAR(45) NULL ,
+  email VARCHAR(250) NULL ,
+  escolaridade VARCHAR(45) NULL DEFAULT 'Outros' ,
+  rede_ensino VARCHAR(45) NULL DEFAULT 'Outros'
+);
+DROP TABLE IF EXISTS "tbl_user";
+CREATE TABLE tbl_user (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    username VARCHAR(128) NOT NULL,
+    password VARCHAR(128) NOT NULL,
+    email VARCHAR(128) NOT NULL
+);
