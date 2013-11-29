@@ -6,18 +6,13 @@ CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 COLLATE utf8_gener
 USE `mydb` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`endereco`
+-- Table `mydb`.`responsavel`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`endereco` (
+CREATE  TABLE IF NOT EXISTS `mydb`.`responsavel` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `pais` VARCHAR(45) NOT NULL DEFAULT 'Brasil' ,
-  `estado` VARCHAR(45) NOT NULL DEFAULT 'Amazonas' ,
-  `cidade` VARCHAR(45) NOT NULL ,
-  `bairro` VARCHAR(50) NOT NULL ,
-  `rua` VARCHAR(250) NOT NULL ,
-  `numero` INT NOT NULL ,
-  `adicional` VARCHAR(250) NULL ,
-  `quadra` INT NULL ,
+  `cpf` VARCHAR(45) NOT NULL ,
+  `nome` VARCHAR(45) NOT NULL ,
+  `telefone` VARCHAR(45) NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
@@ -32,28 +27,53 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`pessoa` (
   `data_de_nascimento` DATE NOT NULL ,
   `rg` BIGINT NOT NULL ,
   `genero` VARCHAR(45) NOT NULL ,
-  `endereco_id` INT NOT NULL ,
-  PRIMARY KEY (`id`) ,
-  INDEX `fk_pessoa_endereco1_idx` (`endereco_id` ASC) ,
-  CONSTRAINT `fk_pessoa_endereco1`
-    FOREIGN KEY (`endereco_id` )
-    REFERENCES `mydb`.`endereco` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `naturalidade` VARCHAR(45) NOT NULL ,
+  `endereco` VARCHAR(250) NOT NULL ,
+  `cep` BIGINT NOT NULL ,
+  `telefone` VARCHAR(45) NULL ,
+  `celular` VARCHAR(45) NULL ,
+  `email` VARCHAR(250) NULL ,
+  `escolaridade` VARCHAR(45) NULL DEFAULT 'Outros' ,
+  `rede_ensino` VARCHAR(45) NULL DEFAULT 'Outros' ,
+  PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`responsavel`
+-- Table `mydb`.`polo`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`responsavel` (
+CREATE  TABLE IF NOT EXISTS `mydb`.`polo` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `nome` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `nome_UNIQUE` (`nome` ASC) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`funcionario`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `mydb`.`funcionario` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `pessoa_id` INT NOT NULL ,
+  `polo_id` INT NOT NULL ,
+  `pis_pasep` VARCHAR(45) NOT NULL ,
+  `tipo` VARCHAR(45) NOT NULL ,
+  `horario` VARCHAR(45) NOT NULL ,
+  `curso_formacao` VARCHAR(250) NULL ,
+  `instituicao_ensino` VARCHAR(250) NULL ,
+  `observacao` VARCHAR(250) NULL ,
   PRIMARY KEY (`id`) ,
-  INDEX `fk_responsavel_pessoa1_idx` (`pessoa_id` ASC) ,
-  CONSTRAINT `fk_responsavel_pessoa1`
+  INDEX `fk_funcionario_pessoa1_idx` (`pessoa_id` ASC) ,
+  INDEX `fk_funcionario_local1_idx` (`polo_id` ASC) ,
+  CONSTRAINT `fk_funcionario_pessoa1`
     FOREIGN KEY (`pessoa_id` )
     REFERENCES `mydb`.`pessoa` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_funcionario_local1`
+    FOREIGN KEY (`polo_id` )
+    REFERENCES `mydb`.`polo` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -66,10 +86,37 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`aluno` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `responsavel_id` INT NOT NULL ,
   `pessoa_id` INT NOT NULL ,
+  `atendente_id` INT NOT NULL ,
   `foto` VARCHAR(250) NOT NULL ,
+  `renda_familiar` DOUBLE NOT NULL ,
+  `nome_pai` VARCHAR(250) NOT NULL ,
+  `nome_mae` VARCHAR(250) NOT NULL ,
+  `situacao_escolar` VARCHAR(45) NOT NULL ,
+  `certidao_numero` VARCHAR(45) NULL ,
+  `certidao_folha` VARCHAR(45) NULL ,
+  `certidao_livro` VARCHAR(45) NULL ,
+  `certidao_cartorio` VARCHAR(45) NULL ,
+  `tipo_sanguineo` VARCHAR(45) NULL DEFAULT 'Não Sabe' ,
+  `estado_civil` VARCHAR(45) NULL DEFAULT 'Solteiro' ,
+  `profissao` VARCHAR(45) NULL DEFAULT 'Outros' ,
+  `bairro` VARCHAR(250) NULL ,
+  `zona` VARCHAR(45) NULL ,
+  `ponto_referencia` VARCHAR(250) NULL ,
+  `ocupacao_imovel` VARCHAR(45) NULL DEFAULT 'Outros' ,
+  `tipo_habitacao` VARCHAR(45) NULL DEFAULT 'Outros' ,
+  `hidraulica` VARCHAR(45) NULL DEFAULT 'Outros' ,
+  `eletrica` VARCHAR(45) NULL DEFAULT 'Outros' ,
+  `telefone_pai` VARCHAR(45) NULL ,
+  `telefone_mae` VARCHAR(45) NULL ,
+  `nome_escola` VARCHAR(250) NULL ,
+  `zona_escola` VARCHAR(45) NULL ,
+  `inicio_deficiencia` DATE NULL ,
+  `alunocol` VARCHAR(45) NULL ,
+  `observacao` VARCHAR(250) NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_portador_responsavel_idx` (`responsavel_id` ASC) ,
   INDEX `fk_portador_pessoa1_idx` (`pessoa_id` ASC) ,
+  INDEX `fk_aluno_funcionario1_idx` (`atendente_id` ASC) ,
   CONSTRAINT `fk_portador_responsavel`
     FOREIGN KEY (`responsavel_id` )
     REFERENCES `mydb`.`responsavel` (`id` )
@@ -79,21 +126,10 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`aluno` (
     FOREIGN KEY (`pessoa_id` )
     REFERENCES `mydb`.`pessoa` (`id` )
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`funcionario`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`funcionario` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `pessoa_id` INT NOT NULL ,
-  PRIMARY KEY (`id`) ,
-  INDEX `fk_funcionario_pessoa1_idx` (`pessoa_id` ASC) ,
-  CONSTRAINT `fk_funcionario_pessoa1`
-    FOREIGN KEY (`pessoa_id` )
-    REFERENCES `mydb`.`pessoa` (`id` )
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_aluno_funcionario1`
+    FOREIGN KEY (`atendente_id` )
+    REFERENCES `mydb`.`funcionario` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -197,38 +233,27 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`local`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `mydb`.`local` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
-  `nome` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`id`) ,
-  UNIQUE INDEX `nome_UNIQUE` (`nome` ASC) )
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `mydb`.`turma`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mydb`.`turma` (
   `int` INT NOT NULL ,
+  `classe_id` INT NOT NULL ,
+  `polo_id` INT NOT NULL ,
   `nome` VARCHAR(45) NOT NULL ,
   `ano` DATE NOT NULL ,
   `vagas` INT NOT NULL ,
-  `classe_id` INT NOT NULL ,
   `unique` TINYINT(1) NOT NULL DEFAULT true ,
-  `local_id` INT NOT NULL ,
   PRIMARY KEY (`int`) ,
   INDEX `fk_table1_classe1_idx` (`classe_id` ASC) ,
-  INDEX `fk_turma_local1_idx` (`local_id` ASC) ,
+  INDEX `fk_turma_local1_idx` (`polo_id` ASC) ,
   CONSTRAINT `fk_table1_classe1`
     FOREIGN KEY (`classe_id` )
     REFERENCES `mydb`.`classe` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_turma_local1`
-    FOREIGN KEY (`local_id` )
-    REFERENCES `mydb`.`local` (`id` )
+    FOREIGN KEY (`polo_id` )
+    REFERENCES `mydb`.`polo` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -281,9 +306,10 @@ ENGINE = InnoDB;
 -- Table `mydb`.`turma_has_funcionario`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `mydb`.`turma_has_funcionario` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT ,
   `turma_int` INT NOT NULL ,
   `funcionario_id` INT NOT NULL ,
-  PRIMARY KEY (`turma_int`, `funcionario_id`) ,
+  PRIMARY KEY (`id`) ,
   INDEX `fk_turma_has_funcionario_funcionario1_idx` (`funcionario_id` ASC) ,
   INDEX `fk_turma_has_funcionario_turma1_idx` (`turma_int` ASC) ,
   CONSTRAINT `fk_turma_has_funcionario_turma1`
@@ -342,6 +368,44 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`avaliacao` (
   CONSTRAINT `fk_turma_has_aluno_has_pergunta_pergunta1`
     FOREIGN KEY (`pergunta_id` )
     REFERENCES `mydb`.`pergunta` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`historico`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `mydb`.`historico` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `pessoa_id` INT NOT NULL ,
+  `data_entrada` DATE NULL ,
+  `data_saida` DATE NULL ,
+  `observacao` VARCHAR(250) NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_historico_pessoa1_idx` (`pessoa_id` ASC) ,
+  CONSTRAINT `fk_historico_pessoa1`
+    FOREIGN KEY (`pessoa_id` )
+    REFERENCES `mydb`.`pessoa` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`triagem`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `mydb`.`triagem` (
+  `id` INT NOT NULL ,
+  `aluno_id` INT NOT NULL ,
+  `descricao` VARCHAR(250) NOT NULL ,
+  `resposta` VARCHAR(45) NOT NULL ,
+  `observacao` VARCHAR(250) NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_triagem_aluno1_idx` (`aluno_id` ASC) ,
+  CONSTRAINT `fk_triagem_aluno1`
+    FOREIGN KEY (`aluno_id` )
+    REFERENCES `mydb`.`aluno` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
