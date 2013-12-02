@@ -60,8 +60,8 @@ class Pessoa extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'alunos' => array(self::HAS_MANY, 'Aluno', 'pessoa_id'),
-			'funcionarios' => array(self::HAS_MANY, 'Funcionario', 'pessoa_id'),
+			'alunos' => array(self::HAS_ONE, 'Aluno', 'pessoa_id'),
+			'funcionarios' => array(self::HAS_ONE, 'Funcionario', 'pessoa_id'),
 			'historicos' => array(self::HAS_MANY, 'Historico', 'pessoa_id'),
 		);
 	}
@@ -76,16 +76,16 @@ class Pessoa extends CActiveRecord
 			'nome' => 'Nome',
 			'cpf' => 'Cpf',
 			'data_de_nascimento' => 'Data De Nascimento',
-			'rg' => 'Rg',
-			'genero' => 'Genero',
+			'rg' => 'Identidade',
+			'genero' => 'Sexo',
 			'naturalidade' => 'Naturalidade',
 			'endereco' => 'Endereco',
-			'cep' => 'Cep',
+			'cep' => 'CEP',
 			'telefone' => 'Telefone',
 			'celular' => 'Celular',
 			'email' => 'Email',
 			'escolaridade' => 'Escolaridade',
-			'rede_ensino' => 'Rede Ensino',
+			'rede_ensino' => 'Rede de Ensino',
 		);
 	}
 

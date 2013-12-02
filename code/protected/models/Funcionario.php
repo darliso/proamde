@@ -73,13 +73,13 @@ class Funcionario extends Pessoa
 		return array(
 			'id' => 'ID',
 			'pessoa_id' => 'Pessoa',
-			'polo_id' => 'Polo',
-			'pis_pasep' => 'Pis Pasep',
+			'polo_id' => 'Pólo',
+			'pis_pasep' => 'Pis/Pasep',
 			'tipo' => 'Tipo',
 			'horario' => 'Horario',
-			'curso_formacao' => 'Curso Formacao',
-			'instituicao_ensino' => 'Instituicao Ensino',
-			'observacao' => 'Observacao',
+			'curso_formacao' => 'Curso Formação',
+			'instituicao_ensino' => 'Instituição de Ensino',
+			'observacao' => 'Observação',
 		);
 	}
 

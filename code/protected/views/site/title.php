@@ -1,5 +1,5 @@
 <?php
 /* @var $this SiteController */
-require 'title.php';
-?>
 
+$this->pageTitle=Yii::app()->name;
+?>

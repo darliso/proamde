@@ -72,6 +72,12 @@ class SiteController extends Controller
 		$this->render('contact',array('model'=>$model));
 	}
 
+        public function actionAluno()
+        {
+            $model= new Aluno;
+            $this->redirect(Yii::app()->homeUrl);
+        }
+        
 	/**
 	 * Displays the login page
 	 */

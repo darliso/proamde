@@ -154,7 +154,7 @@ class AlunoController extends Controller
 	{
 		$model=Aluno::model()->findByPk($id);
 		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
+			throw new CHttpException(404,'Página não encontrada.');
 		return $model;
 	}
 
