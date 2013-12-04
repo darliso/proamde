@@ -18,14 +18,45 @@
  * @property string $email
  * @property string $escolaridade
  * @property string $rede_ensino
+ * @property string $uf
  *
  * The followings are the available model relations:
- * @property Aluno[] $alunos
  * @property Funcionario[] $funcionarios
  * @property Historico[] $historicos
  */
 class Pessoa extends CActiveRecord
 {
+    
+    public static  $escolaridades = array (
+        'Alfabetizado',
+        'Não Alfabetizado',
+        'EJA',
+        'Educação Especial',
+        'Ensino Infantil Incompleto',
+        'Ensino Infantil Completo',
+        'Ensino Fundamental Incompleto',
+        'Ensino Fundamental Completo',
+        'Ensino Médio Incompleto',
+        'Ensino Médio completo',
+        'Ensino Superior Incompleto',
+        'Ensino Superior Completo',
+        'Especialização Incompleta',
+        'Especialização Completa',
+        'Mestrado Incompleto',
+        'Mestrado Completo',
+        'Doutorado Incompleto',
+        'Doutorado Completo',
+        'Outros',
+    );
+    
+    public static $redes_ensino = array (
+        'Particular',
+        'Pública Municipal',
+        'Pública Estadual',
+        'Pública Federal',
+        'Outros',
+    );
+   
 	/**
 	 * @return string the associated database table name
 	 */
@@ -42,13 +73,13 @@ class Pessoa extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nome, cpf, data_de_nascimento, rg, genero, naturalidade, endereco, cep', 'required'),
+			array('nome, cpf, data_de_nascimento, rg, genero, naturalidade, endereco, cep, uf', 'required'),
 			array('cpf, rg, cep', 'numerical', 'integerOnly'=>true),
 			array('nome, endereco, email', 'length', 'max'=>250),
-			array('genero, naturalidade, telefone, celular, escolaridade, rede_ensino', 'length', 'max'=>45),
+			array('genero, naturalidade, telefone, celular, escolaridade, rede_ensino, uf', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, nome, cpf, data_de_nascimento, rg, genero, naturalidade, endereco, cep, telefone, celular, email, escolaridade, rede_ensino', 'safe', 'on'=>'search'),
+			array('id, nome, cpf, data_de_nascimento, rg, genero, naturalidade, endereco, cep, telefone, celular, email, escolaridade, rede_ensino, uf', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -60,8 +91,7 @@ class Pessoa extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'alunos' => array(self::HAS_ONE, 'Aluno', 'pessoa_id'),
-			'funcionarios' => array(self::HAS_ONE, 'Funcionario', 'pessoa_id'),
+			'funcionarios' => array(self::HAS_MANY, 'Funcionario', 'pessoa_id'),
 			'historicos' => array(self::HAS_MANY, 'Historico', 'pessoa_id'),
 		);
 	}
@@ -76,16 +106,17 @@ class Pessoa extends CActiveRecord
 			'nome' => 'Nome',
 			'cpf' => 'Cpf',
 			'data_de_nascimento' => 'Data De Nascimento',
-			'rg' => 'Identidade',
-			'genero' => 'Sexo',
+			'rg' => 'Rg',
+			'genero' => 'Genero',
 			'naturalidade' => 'Naturalidade',
 			'endereco' => 'Endereco',
-			'cep' => 'CEP',
+			'cep' => 'Cep',
 			'telefone' => 'Telefone',
 			'celular' => 'Celular',
 			'email' => 'Email',
 			'escolaridade' => 'Escolaridade',
-			'rede_ensino' => 'Rede de Ensino',
+			'rede_ensino' => 'Rede Ensino',
+			'uf' => 'UF',
 		);
 	}
 
@@ -121,6 +152,7 @@ class Pessoa extends CActiveRecord
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('escolaridade',$this->escolaridade,true);
 		$criteria->compare('rede_ensino',$this->rede_ensino,true);
+		$criteria->compare('uf',$this->uf,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -44,6 +44,91 @@
  */
 class Aluno extends Pessoa
 {
+    
+        public static $situacoes_escolares = array (
+            'Estuda',
+            'Não Estuda',
+            'Nunca Estudou',
+            'Estudo Concluído',
+        );
+        
+        public static $estados_civis = array (
+            'Solteiro',
+            'Casado',
+            'Viúvo',
+            'União Estável',
+            'Divorciado',
+            'Separado',
+            'Outros',
+        );
+        
+        public static $profissoes = array (
+            'Desempregado',
+            'Estudante',
+            'Autônomo',
+            'Sem ocupação',
+            'Funcionário Público',
+            'Inicia. Privada',
+            'Aposentado',
+            'Aposent. Invalidez',
+            'Auxílio doença',
+            'BPC',
+            'Outros',
+        );
+        
+        public static $zonas = array (
+            'Leste',
+            'Oeste',
+            'Norte',
+            'Sul',
+            'Centro-Oeste',
+            'Centro-Sul',
+        );
+        
+        public static $tipos_sanguineos = array (
+            'A positivo',
+            'A negativo',
+            'O positivo',
+            'O negativo',
+            'AB positivo',
+            'AB negativo',
+            'B positivo',
+            'B negativo',
+            'Não Sabe',
+        );
+        
+        public static $ocupacoes_imovel = array (
+            'Próprio',
+            'Alugado',
+            'Inválido',
+            'Cedido',
+            'Doação',
+            'Outros',
+        );
+        
+        public static $tipos_habitacao = array (
+            'Alvenaria',
+            'Madeira',
+            'Taipa',
+            'Mista',
+            'Outros',
+        );
+        
+        public static $instalacoes_hidraulicas = array (
+            'Encanada',
+            'Não Encanada',
+            'Cacimba',
+            'Poço',
+            'Outros',
+        );
+        
+        public static $instalacoes_eletricas = array (
+            'Ligação Oficial',
+            'Ligação Não Oficial (Gato)',
+            'Não Possui',
+            'Outros',
+        );
+        
 	/**
 	 * @return string the associated database table name
 	 */
@@ -60,7 +145,7 @@ class Aluno extends Pessoa
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('responsavel_id, pessoa_id, atendente_id, foto, renda_familiar, nome_pai, nome_mae, situacao_escolar', 'required'),
+			array('foto, renda_familiar, nome_pai, nome_mae, situacao_escolar', 'required'),
 			array('responsavel_id, pessoa_id, atendente_id', 'numerical', 'integerOnly'=>true),
 			array('renda_familiar', 'numerical'),
 			array('foto, nome_pai, nome_mae, bairro, ponto_referencia, nome_escola, observacao', 'length', 'max'=>250),
@@ -72,6 +157,35 @@ class Aluno extends Pessoa
 		);
 	}
 
+        public function setAtributes($array, $arrayPerson) {
+            $this->attributes = $array;
+            if($this->pessoa != null) {
+                $this->pessoa->attributes = $arrayPerson;
+            }
+        }
+        
+        public function validateData() {
+            if($this->pessoa == null) {
+                 $result = false;
+            } else {
+                $result = $this->pessoa->validate();
+                $result = $result && $this->validate();
+               
+            }
+            return $result;
+        }
+        
+        public function saveData() {
+            
+            if($this->pessoa != null) {
+                $this->pessoa->save();
+                $this->pessoa_id = $this->pessoa->id;
+            }
+            $this->responsavel_id = 1;
+            $this->atendente_id= 1;
+            $this->save();
+        }
+        
 	/**
 	 * @return array relational rules.
 	 */
@@ -104,10 +218,10 @@ class Aluno extends Pessoa
 			'nome_pai' => 'Nome do Pai',
 			'nome_mae' => 'Nome da Mae',
 			'situacao_escolar' => 'Situacao Escolar',
-			'certidao_numero' => 'Numero da Certidão de Nascimento',
-			'certidao_folha' => 'Folha da Certidão de Nascimento',
-			'certidao_livro' => 'Livro da Certidão de Nascimento',
-			'certidao_cartorio' => 'Cartório da Certidão de Nascimento',
+			'certidao_numero' => 'Nº da Certidão',
+			'certidao_folha' => 'Folha da Certidão',
+			'certidao_livro' => 'Livro da Certidão',
+			'certidao_cartorio' => 'Cartório da Certidão',
 			'tipo_sanguineo' => 'Tipo Sanguíneo',
 			'estado_civil' => 'Estado Civil',
 			'profissao' => 'Profissão',

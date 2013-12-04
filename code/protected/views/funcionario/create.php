@@ -15,4 +15,4 @@ $this->menu=array(
 
 <h1>Cadastrar Funcionário</h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model, 'pessoa'=>$pessoa)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model, 'pessoa'=>$model->pessoa)); ?>

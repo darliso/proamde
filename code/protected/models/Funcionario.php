@@ -39,7 +39,7 @@ class Funcionario extends Pessoa
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('pessoa_id, polo_id, pis_pasep, tipo, horario', 'required'),
+			array('pis_pasep, tipo, horario', 'required'),
 			array('pessoa_id, polo_id', 'numerical', 'integerOnly'=>true),
 			array('pis_pasep, tipo, horario', 'length', 'max'=>45),
 			array('curso_formacao, instituicao_ensino, observacao', 'length', 'max'=>250),
@@ -48,6 +48,20 @@ class Funcionario extends Pessoa
 			array('id, pessoa_id, polo_id, pis_pasep, tipo, horario, curso_formacao, instituicao_ensino, observacao', 'safe', 'on'=>'search'),
 		);
 	}
+        
+        public function saveData() {
+            if($this->pessoa != null) {
+                $this->pessoa->save();
+            }
+            $this->save();
+        }
+        
+        public function deleteData() {
+            if($this->pessoa != null) {
+                 $this->pessoa->delete();
+            }
+            $this->delete();
+        }
 
 	/**
 	 * @return array relational rules.

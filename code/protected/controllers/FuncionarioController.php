@@ -59,20 +59,21 @@ class FuncionarioController extends Controller {
      */
     public function actionCreate() {
         $model = new Funcionario;
-        $pessoa = new Pessoa;
+        $model->pessoa = new Pessoa;
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
         if (isset($_POST['Funcionario'], $_POST['Pessoa'])) {
 
             $model->attributes = $_POST['Funcionario'];
-            $pessoa->attributes = $_POST['Pessoa'];
+            $model->pessoa->attributes = $_POST['Pessoa'];
 
             $valid = $model->validate();
-            $valid = $pessoa->validate() && $valid;
+            $valid = $model->pessoa->validate() && $valid;
             if ($valid) {
-                $pessoa->save(false);
-                $model->pessoa = $pessoa;
+                $model->pessoa->save(false);
+                $model->pessoa_id = $model->pessoa->id;
+                $model->polo_id = 1;
                 $model->save(false);
                 $this->redirect(array('view', 'id' => $model->id));
             }
@@ -80,7 +81,7 @@ class FuncionarioController extends Controller {
 
         $this->render('create', array(
             'model' => $model,
-            'pessoa' => $pessoa,
+            'pessoa' => $model->pessoa,
         ));
     }
 
@@ -95,14 +96,22 @@ class FuncionarioController extends Controller {
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if (isset($_POST['Funcionario'])) {
+        if (isset($_POST['Funcionario'], $_POST['Pessoa'])) {
             $model->attributes = $_POST['Funcionario'];
-            if ($model->save())
+            $model->pessoa->attributes = $_POST['Pessoa'];
+            
+            $valid = $model->validate();
+            $valid = $model->pessoa->validate() && $valid;
+            
+            if ($valid) {
+                $model->saveData();
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('update', array(
             'model' => $model,
+            'pessoa' => $model->pessoa,
         ));
     }
 
@@ -112,7 +121,7 @@ class FuncionarioController extends Controller {
      * @param integer $id the ID of the model to be deleted
      */
     public function actionDelete($id) {
-        $this->loadModel($id)->delete();
+        $this->loadModel($id)->deleteData();
 
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if (!isset($_GET['ajax']))
@@ -152,8 +161,10 @@ class FuncionarioController extends Controller {
      */
     public function loadModel($id) {
         $model = Funcionario::model()->findByPk($id);
+        $model->pessoa = Pessoa::model()->findByPk($model->pessoa_id);
+        $model->polo = Polo::model()->findByPk($model->polo_id);
         if ($model === null)
-            throw new CHttpException(404, 'The requested page does not exist.');
+            throw new CHttpException(404, 'Página não encontrada.');
         return $model;
     }
 

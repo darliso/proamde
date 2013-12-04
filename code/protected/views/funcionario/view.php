@@ -11,24 +11,20 @@ $this->menu=array(
 	array('label'=>'List Funcionario', 'url'=>array('index')),
 	array('label'=>'Create Funcionario', 'url'=>array('create')),
 	array('label'=>'Update Funcionario', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Funcionario', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Delete Funcionario', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Deseja Realmente Deletar este Funcionario?')),
 	array('label'=>'Manage Funcionario', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View Funcionario #<?php echo $model->id; ?></h1>
+<h1>Funcionário <?php echo $model->pessoa->nome; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
+	'data'=>$model->pessoa,
 	'attributes'=>array(
 		'id',
-		'pessoa_id',
-		'polo_id',
-		'pis_pasep',
-		'tipo',
-		'horario',
-		'curso_formacao',
-		'instituicao_ensino',
-		'observacao',
+		'nome',
+		'cpf',
+                'rg',
+		'email',
 	),
 )); ?>
