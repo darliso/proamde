@@ -145,7 +145,7 @@ class Aluno extends Pessoa
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('foto, renda_familiar, nome_pai, nome_mae, situacao_escolar', 'required'),
+			array('foto, renda_familiar, nome_pai, nome_mae', 'required'),
 			array('responsavel_id, pessoa_id, atendente_id', 'numerical', 'integerOnly'=>true),
 			array('renda_familiar', 'numerical'),
 			array('foto, nome_pai, nome_mae, bairro, ponto_referencia, nome_escola, observacao', 'length', 'max'=>250),
@@ -165,13 +165,12 @@ class Aluno extends Pessoa
         }
         
         public function validateData() {
-            if($this->pessoa == null) {
-                 $result = false;
-            } else {
-                $result = $this->pessoa->validate();
-                $result = $result && $this->validate();
+            $result = false;
+            if($this->pessoa != null) {
+                $result = $this->pessoa->validate() && $this->validate();
                
             }
+            echo 'result:'.$result;
             return $result;
         }
         
@@ -182,7 +181,7 @@ class Aluno extends Pessoa
                 $this->pessoa_id = $this->pessoa->id;
             }
             $this->responsavel_id = 1;
-            $this->atendente_id= 1;
+            $this->atendente_id= 3;
             $this->save();
         }
         
@@ -217,7 +216,7 @@ class Aluno extends Pessoa
 			'renda_familiar' => 'Renda Familiar',
 			'nome_pai' => 'Nome do Pai',
 			'nome_mae' => 'Nome da Mae',
-			'situacao_escolar' => 'Situacao Escolar',
+			'situacao_escolar' => 'Situação Escolar',
 			'certidao_numero' => 'Nº da Certidão',
 			'certidao_folha' => 'Folha da Certidão',
 			'certidao_livro' => 'Livro da Certidão',

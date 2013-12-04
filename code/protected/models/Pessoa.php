@@ -107,7 +107,7 @@ class Pessoa extends CActiveRecord
 			'cpf' => 'Cpf',
 			'data_de_nascimento' => 'Data De Nascimento',
 			'rg' => 'Rg',
-			'genero' => 'Genero',
+			'genero' => 'Sexo',
 			'naturalidade' => 'Naturalidade',
 			'endereco' => 'Endereco',
 			'cep' => 'Cep',

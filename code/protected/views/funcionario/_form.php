@@ -38,6 +38,12 @@
         </div>
         
         <div class="row">
+                <?php echo $form->labelEx($pessoa,'uf'); ?>
+		<?php echo $form->textField($pessoa,'uf'); ?>
+		<?php echo $form->error($pessoa,'uf'); ?>
+        </div>
+        
+        <div class="row">
                 <?php echo $form->labelEx($pessoa,'rg'); ?>
 		<?php echo $form->textField($pessoa,'rg'); ?>
 		<?php echo $form->error($pessoa,'rg'); ?>

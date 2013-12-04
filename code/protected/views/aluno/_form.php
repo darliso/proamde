@@ -7,63 +7,60 @@
 <div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'aluno-form',
-	// Please note: When you enable ajax validation, make sure the corresponding
-	// controller action is handling ajax validation correctly.
-	// There is a call to performAjaxValidation() commented in generated controller code.
-	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>false,
+        'enableClientValidation'=> true
 )); ?>
 
 	<p class="note">Campos com <span class="required">*</span> são obrigatórios.</p>
 
-	<?php echo $form->errorSummary($model, $model->pessoa); ?>
+	<?php echo $form->errorSummary($model); ?>
+        <?php echo $form->errorSummary($pessoa); ?>
         
 	<div class="row">
             <div class="column">
-		<?php echo $form->labelEx($model->pessoa,'nome'); ?>
-		<?php echo $form->textField($model->pessoa,'nome',array('size'=>50,'maxlength'=>250)); ?>
-		<?php echo $form->error($model->pessoa,'nome'); ?>
+		<?php echo $form->labelEx($pessoa,'nome'); ?>
+		<?php echo $form->textField($pessoa,'nome',array('size'=>50,'maxlength'=>250)); ?>
+		<?php echo $form->error($pessoa,'nome'); ?>
             </div>
             <div class="column">
-		<?php echo $form->labelEx($model->pessoa,'email'); ?>
-		<?php echo $form->textField($model->pessoa,'email',array('size'=>50,'maxlength'=>250)); ?>
-		<?php echo $form->error($model->pessoa,'email'); ?>
+		<?php echo $form->labelEx($pessoa,'email'); ?>
+		<?php echo $form->textField($pessoa,'email',array('size'=>50,'maxlength'=>250)); ?>
+		<?php echo $form->error($pessoa,'email'); ?>
             </div>
 	</div>
         
 	<div class="row">
             <div class="column">
-		<?php echo $form->labelEx($model->pessoa,'cpf'); ?>
-		<?php echo $form->textField($model->pessoa,'cpf'); ?>
-		<?php echo $form->error($model->pessoa,'cpf'); ?>
+		<?php echo $form->labelEx($pessoa,'cpf'); ?>
+		<?php echo $form->textField($pessoa,'cpf'); ?>
+		<?php echo $form->error($pessoa,'cpf'); ?>
             </div>
             <div class="column">
-                <?php echo $form->labelEx($model->pessoa,'rg'); ?>
-		<?php echo $form->textField($model->pessoa,'rg'); ?>
-		<?php echo $form->error($model->pessoa,'rg'); ?>
+                <?php echo $form->labelEx($pessoa,'rg'); ?>
+		<?php echo $form->textField($pessoa,'rg'); ?>
+		<?php echo $form->error($pessoa,'rg'); ?>
             </div>
             <div class="column">
-                <?php echo $form->labelEx($model->pessoa,'data_de_nascimento'); ?>
-		<?php echo $form->textField($model->pessoa,'data_de_nascimento',array('maxlength'=>8)); ?>
-		<?php echo $form->error($model->pessoa,'data_de_nascimento'); ?>
+                <?php echo $form->labelEx($pessoa,'data_de_nascimento'); ?>
+		<?php echo $form->textField($pessoa,'data_de_nascimento',array('maxlength'=>8)); ?>
+		<?php echo $form->error($pessoa,'data_de_nascimento'); ?>
             </div>
             <div class="column">
-                <?php echo $form->labelEx($model->pessoa,'genero'); ?>
-		<?php echo CHtml::dropDownList('genero', $model->pessoa, 
-              array('M' => ' Masculino ', 'F' => ' Feminino ')); ?>
+                <?php echo $form->labelEx($pessoa,'genero'); ?>
+		<?php echo $form->dropDownList($pessoa,'genero',array('Masculino','Feminino'),array('empty' => ''));?>
             </div>
 	</div>
 
         <div class="row">
             <div class="column">
-                <?php echo $form->labelEx($model->pessoa,'naturalidade'); ?>
-		<?php echo $form->textField($model->pessoa,'naturalidade',array('size'=>50,'maxlength'=>45)); ?>
-		<?php echo $form->error($model->pessoa,'naturalidade'); ?>
+                <?php echo $form->labelEx($pessoa,'naturalidade'); ?>
+		<?php echo $form->textField($pessoa,'naturalidade',array('size'=>50,'maxlength'=>45)); ?>
+		<?php echo $form->error($pessoa,'naturalidade'); ?>
             </div>
             <div class="column">
-                <?php echo $form->labelEx($model->pessoa,'endereco'); ?>
-		<?php echo $form->textField($model->pessoa,'endereco',array('size'=>50,'maxlength'=>250)); ?>
-		<?php echo $form->error($model->pessoa,'endereco'); ?>
+                <?php echo $form->labelEx($pessoa,'endereco'); ?>
+		<?php echo $form->textField($pessoa,'endereco',array('size'=>50,'maxlength'=>250)); ?>
+		<?php echo $form->error($pessoa,'endereco'); ?>
             </div>
         </div>
         
@@ -85,48 +82,44 @@
 		<?php echo $form->error($model,'ponto_referencia'); ?>
             </div>
         </div>
-        
         <div class="row">
             <div class="column">
-                <?php echo $form->labelEx($model->pessoa,'uf'); ?>
-		<?php echo $form->textField($model->pessoa,'uf',array('size'=>26,'maxlength'=>45)); ?>
-		<?php echo $form->error($model->pessoa,'uf'); ?>
+                <?php echo $form->labelEx($pessoa,'uf'); ?>
+		<?php echo $form->textField($pessoa,'uf',array('size'=>26,'maxlength'=>45)); ?>
+		<?php echo $form->error($pessoa,'uf'); ?>
             </div>
             
             <div class="column">
-                <?php echo $form->labelEx($model->pessoa,'cep'); ?>
-		<?php echo $form->textField($model->pessoa,'cep') ?>
-		<?php echo $form->error($model->pessoa,'cep'); ?>
+                <?php echo $form->labelEx($pessoa,'cep'); ?>
+		<?php echo $form->textField($pessoa,'cep') ?>
+		<?php echo $form->error($pessoa,'cep'); ?>
             </div>
             
             <div class="column">
-                <?php echo $form->labelEx($model->pessoa,'telefone'); ?>
-		<?php echo $form->textField($model->pessoa,'telefone',array('maxlength'=>20)); ?>
-		<?php echo $form->error($model->pessoa,'telefone'); ?>
+                <?php echo $form->labelEx($pessoa,'telefone'); ?>
+		<?php echo $form->textField($pessoa,'telefone',array('maxlength'=>20)); ?>
+		<?php echo $form->error($pessoa,'telefone'); ?>
             </div> 
             
             <div class="column">
-                <?php echo $form->labelEx($model->pessoa,'celular'); ?>
-		<?php echo $form->textField($model->pessoa,'celular',array('maxlength'=>20)); ?>
-		<?php echo $form->error($model->pessoa,'celular'); ?>
+                <?php echo $form->labelEx($pessoa,'celular'); ?>
+		<?php echo $form->textField($pessoa,'celular',array('maxlength'=>20)); ?>
+		<?php echo $form->error($pessoa,'celular'); ?>
             </div> 
             
             <div class="column">
-                <?php echo $form->labelEx($model->pessoa,'escolaridade'); ?>
-		<?php echo CHtml::dropDownList('escolaridade', $model->pessoa, 
-              Pessoa::$escolaridades); ?>
+                <?php echo $form->labelEx($pessoa,'escolaridade'); ?>
+		<?php echo $form->dropDownList($pessoa,'escolaridade',Pessoa::$escolaridades,array('empty' => ''));?>
             </div>  
             
             <div class="column">
 		<?php echo $form->labelEx($model,'situacao_escolar'); ?>
-		<?php echo CHtml::dropDownList('situacao_escolar', $model, 
-              Aluno::$situacoes_escolares); ?>
+		<?php echo $form->dropDownList($model,'situacao_escolar',Aluno::$situacoes_escolares,array('empty' => ''));?>
             </div>
             
             <div class="column">
-                <?php echo $form->labelEx($model->pessoa,'rede_ensino'); ?>
-		<?php echo  CHtml::dropDownList('rede_ensino', $model->pessoa, 
-              Pessoa::$redes_ensino); ?>
+                <?php echo $form->labelEx($pessoa,'rede_ensino'); ?>
+                <?php echo $form->dropDownList($pessoa,'rede_ensino',Pessoa::$redes_ensino,array('empty' => ''));?>
             </div>
             
             <div class="column">
@@ -174,40 +167,33 @@
 	<div class="row">
             <div class="column">
 		<?php echo $form->labelEx($model,'tipo_sanguineo'); ?>
-		<?php echo  CHtml::dropDownList('tipo_sanguineo', $model, 
-              Aluno::$tipos_sanguineos); ?>
+		<?php echo $form->dropDownList($model,'tipo_sanguineo',Aluno::$tipos_sanguineos,array('empty' => ''));?>
             </div>	
             <div class="column">
 		<?php echo $form->labelEx($model,'estado_civil'); ?>
-		<?php echo CHtml::dropDownList('estado_civil', $model, 
-              Aluno::$estados_civis); ?>
+		<?php echo $form->dropDownList($model,'estado_civil',Aluno::$estados_civis,array('empty' => ''));?>
             </div>
             <div class="column">
 		<?php echo $form->labelEx($model,'profissao'); ?>
-		<?php echo CHtml::dropDownList('profissao', $model, 
-              Aluno::$profissoes); ?>
+		<?php echo $form->dropDownList($model,'profissao',Aluno::$profissoes,array('empty' => ''));?>
             </div>
             <div class="column">
 		<?php echo $form->labelEx($model,'ocupacao_imovel'); ?>
-		<?php echo CHtml::dropDownList('ocupacao_imovel', $model, 
-              Aluno::$ocupacoes_imovel); ?>
+		<?php echo $form->dropDownList($model,'ocupacao_imovel',Aluno::$ocupacoes_imovel,array('empty' => ''));?>
             </div>
             
             <div class="column">
 		<?php echo $form->labelEx($model,'tipo_habitacao'); ?>
-		<?php echo CHtml::dropDownList('tipo_habitacao', $model, 
-              Aluno::$tipos_habitacao); ?>
+		<?php echo $form->dropDownList($model,'tipo_habitacao',Aluno::$tipos_habitacao,array('empty' => ''));?>
             </div>
             
             <div class="column">
 		<?php echo $form->labelEx($model,'hidraulica'); ?>
-		<?php echo CHtml::dropDownList('hidraulica', $model, 
-              Aluno::$instalacoes_hidraulicas); ?>
+		<?php echo $form->dropDownList($model,'hidraulica',Aluno::$instalacoes_hidraulicas,array('empty' => ''));?>
             </div>
             <div class="column">
 		<?php echo $form->labelEx($model,'eletrica'); ?>
-		<?php echo CHtml::dropDownList('eletrica', $model, 
-              Aluno::$instalacoes_eletricas); ?>
+		<?php echo $form->dropDownList($model,'eletrica',Aluno::$instalacoes_eletricas, array('empty' => ''));?>
             </div>
             
             <div class="column">
