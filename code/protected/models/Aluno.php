@@ -129,6 +129,7 @@ class Aluno extends Pessoa
             'Outros',
         );
         
+        public $caracteristicas = array();
 	/**
 	 * @return string the associated database table name
 	 */
@@ -157,6 +158,14 @@ class Aluno extends Pessoa
 		);
 	}
 
+        public function setCaracteristica ($caracteristica) {
+            if($this->caracteristicas)
+            $this->caracteristicas->add($caracteristica);
+            
+            echo "$caracteristica";
+            
+        }
+        
         public function setAtributes($array, $arrayPerson) {
             $this->attributes = $array;
             if($this->pessoa != null) {
@@ -259,11 +268,8 @@ class Aluno extends Pessoa
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('responsavel_id',$this->responsavel_id);
-		$criteria->compare('pessoa_id',$this->pessoa_id);
-		$criteria->compare('atendente_id',$this->atendente_id);
-		$criteria->compare('foto',$this->foto,true);
-		$criteria->compare('renda_familiar',$this->renda_familiar);
+		$criteria->compare('foto',$this->foto,true,true);
+		$criteria->compare('renda_familiar',$this->renda_familiar,true);
 		$criteria->compare('nome_pai',$this->nome_pai,true);
 		$criteria->compare('nome_mae',$this->nome_mae,true);
 		$criteria->compare('situacao_escolar',$this->situacao_escolar,true);

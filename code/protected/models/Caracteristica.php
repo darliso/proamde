@@ -16,12 +16,11 @@ class Caracteristica extends CActiveRecord
 {
     
         public static $tipos = array(
-            'Deficiência',
+            'Deficiencia',
             'Patologia',
             'Sequela',
-            'Órtese / Prótese',
-            'Observação',
-            'Faixa Etária',
+            'Ortese/Protese',
+            'Observacao',
         );
 	/**
 	 * @return string the associated database table name

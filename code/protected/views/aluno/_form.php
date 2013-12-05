@@ -17,6 +17,10 @@
 
         <?php echo $form->errorSummary($model); ?>
         <?php echo $form->errorSummary($pessoa); ?>
+    
+        <div class="row buttons">
+            <?php echo CHtml::submitButton($model->isNewRecord ? '  Cadastrar  ' : '   Salvar   ', array('size' => 13)); ?>
+        </div>
 
     <div >
         <?php echo $form->labelEx($pessoa, 'nome'); ?>
@@ -50,8 +54,7 @@
         <?php echo $form->labelEx($pessoa, 'genero'); ?>
         <?php echo $form->dropDownList($pessoa, 'genero', array('Masculino', 'Feminino'), array('empty' => '')); ?>
     </div>
-
-
+    
     <div >
         <?php echo $form->labelEx($pessoa, 'naturalidade'); ?>
         <?php echo $form->textField($pessoa, 'naturalidade', array('size' => 50, 'maxlength' => 45)); ?>
@@ -62,7 +65,6 @@
         <?php echo $form->textField($pessoa, 'endereco', array('size' => 50, 'maxlength' => 250)); ?>
         <?php echo $form->error($pessoa, 'endereco'); ?>
     </div>
-
 
     <div >
         <?php echo $form->labelEx($model, 'bairro'); ?>
@@ -224,17 +226,47 @@
 
     <div >
         <?php echo $form->labelEx($model, 'foto'); ?>
-        <?php echo $form->textField($model, 'foto', array('size' => 88, 'maxlength' => 250)); ?>
+        <?php echo $form->textField($model, 'foto', array('size' => 70, 'maxlength' => 250)); ?>
         <?php echo CHtml::button('  Obter Arquivo  ', array('size' => 13)); ?>
         <?php echo $form->error($model, 'foto'); ?>
     </div>
+    
+    <br/>
+    <br/>
+    <br/>
+    <div >
+    <!-- search-form -->
 
-
-    <div class="row buttons">
-        <div >
-            <?php echo CHtml::submitButton($model->isNewRecord ? '  Cadastrar  ' : '   Salvar   ', array('size' => 13)); ?>
-        </div>
-    </div>
+    
+    <?php 
+//    foreach(Caracteristica::$tipos as $tipo) {
+//         echo CHtml::checkBoxList('list_caracteristicas',CHtml::listData(Caracteristica::model()-> 
+//                 findAll(), 'nome'), $caracteristica);
+//         
+//    }
+   
+    
+        $caracteristicas = Caracteristica::model()->findAll();
+        foreach( Caracteristica::$tipos as $tipo ) {
+            echo '<div class="column" style="max-width: 14">';
+            echo "<b>$tipo</b>";
+            foreach($caracteristicas as $caract) {
+                if($caract->tipo == $tipo) {
+                    echo '<div class="row" style="background: #FFFFFF">';
+                    echo $form->radioButton($pessoa, 'genero', array( //TODO: codigo deve ser alterado.
+                    'value'=>$caract->nome,
+                    'uncheckValue'=>null)).' ';
+                    echo $caract->nome;
+                    echo '</div>';
+                }
+            }
+            echo '</div>';
+        }
+    ?>
+    </div >
+    
+    <br/>
+    <br/>
 
     <?php $this->endWidget(); ?>
 

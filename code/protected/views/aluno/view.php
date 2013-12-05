@@ -13,15 +13,29 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Aluno #<?php echo $model->id; ?></h1>
+<h1>Aluno - <?php echo $model->pessoa->nome; ?></h1>
 
+<?php $this->widget('zii.widgets.CDetailView', array(
+	'data'=>$model->pessoa,
+	'attributes'=>array(
+		'nome',
+                'email',
+		'cpf',
+                'rg',
+                'genero',
+                'endereco',
+                'data_de_nascimento',
+		'uf',
+                'cep',
+                'telefone',
+                'celular',
+                'rede_ensino',
+		'escolaridade',
+	),
+)); ?>
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
-		'id',
-		'responsavel_id',
-		'pessoa_id',
-		'atendente_id',
 		'foto',
 		'renda_familiar',
 		'nome_pai',
