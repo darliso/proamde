@@ -8,13 +8,8 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 	array('label'=>'Cadastrar Novo Aluno', 'url'=>array('create')),
-	array('label'=>'Gerenciar Alunos', 'url'=>array('admin')),
 );
+
+    $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+
 ?>
-
-<h1>Alunos</h1>
-
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-)); ?>

@@ -8,8 +8,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Aluno', 'url'=>array('index')),
-	array('label'=>'Manage Aluno', 'url'=>array('admin')),
+	array('label'=>'Gerenciar Alunos', 'url'=>array('admin')),
 );
 ?>
 

@@ -5,17 +5,15 @@
 $this->breadcrumbs=array(
 	'Alunos'=>array('index'),
 	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	'Modificar',
 );
 
 $this->menu=array(
-	array('label'=>'List Aluno', 'url'=>array('index')),
-	array('label'=>'Create Aluno', 'url'=>array('create')),
-	array('label'=>'View Aluno', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Aluno', 'url'=>array('admin')),
+	array('label'=>'Cadastrar Novo Aluno', 'url'=>array('create')),
+	array('label'=>'Gerenciar Alunos', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update Aluno <?php echo $model->id; ?></h1>
+<h1>Modificar Aluno <?php echo $model->id; ?></h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model,'pessoa'=>$pessoa)); ?>

@@ -6,7 +6,7 @@
  * The followings are the available columns in table 'caracteristica':
  * @property integer $id
  * @property string $nome
- * @property string $descricao
+ * @property string $tipo
  *
  * The followings are the available model relations:
  * @property AlunoHasCaracteristica[] $alunoHasCaracteristicas
@@ -14,6 +14,15 @@
  */
 class Caracteristica extends CActiveRecord
 {
+    
+        public static $tipos = array(
+            'Deficiência',
+            'Patologia',
+            'Sequela',
+            'Órtese / Prótese',
+            'Observação',
+            'Faixa Etária',
+        );
 	/**
 	 * @return string the associated database table name
 	 */
@@ -31,10 +40,10 @@ class Caracteristica extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('nome', 'required'),
-			array('nome, descricao', 'length', 'max'=>45),
+			array('nome, tipo', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, nome, descricao', 'safe', 'on'=>'search'),
+			array('id, nome, tipo', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,7 +68,7 @@ class Caracteristica extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'nome' => 'Nome',
-			'descricao' => 'Descricao',
+			'tipo' => 'Tipo',
 		);
 	}
 
@@ -83,7 +92,7 @@ class Caracteristica extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('nome',$this->nome,true);
-		$criteria->compare('descricao',$this->descricao,true);
+		$criteria->compare('tipo',$this->tipo,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -100,4 +109,5 @@ class Caracteristica extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
 }

@@ -8,11 +8,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Aluno', 'url'=>array('index')),
-	array('label'=>'Create Aluno', 'url'=>array('create')),
-	array('label'=>'Update Aluno', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Aluno', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Aluno', 'url'=>array('admin')),
+	array('label'=>'Cadastrar Novo Aluno', 'url'=>array('create')),
+	array('label'=>'Gerenciar Alunos', 'url'=>array('admin')),
 );
 ?>
 
