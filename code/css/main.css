@@ -44,7 +44,7 @@ body
 #logo
 {
 	padding: 10px 20px;
-	font-size: 200%;
+	font-size: 250%;
 }
 
 #mainmenu
@@ -67,7 +67,7 @@ body
 {
 	color:#ffffff;
 	background-color:transparent;
-	font-size:12px;
+	font-size:15px;
 	font-weight:bold;
 	text-decoration:none;
 	padding:5px 8px;
@@ -137,7 +137,7 @@ div.view
 
 div.breadcrumbs
 {
-	font-size: 0.9em;
+	font-size: 1.0em;
 	padding: 5px 20px;
 }
 
@@ -155,19 +155,19 @@ div.search-form
 
 .portlet
 {
-
+        float: left;
 }
 
 .portlet-decoration
 {
-	padding: 3px 8px;
+	padding: 10px 20px;
 	background: #B7D6E7;
 	border-left: 5px solid #6FACCF;
 }
 
 .portlet-title
 {
-	font-size: 12px;
+	font-size: 14px;
 	font-weight: bold;
 	padding: 0;
 	margin: 0;
@@ -177,7 +177,8 @@ div.search-form
 .portlet-content
 {
 	font-size:0.9em;
-	margin: 0 0 15px 0;
+        width: 160px;
+	margin: 0 0 0 0;
 	padding: 5px 8px;
 	background:#EFFDFF;
 }

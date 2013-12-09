@@ -14,14 +14,6 @@
  */
 class Caracteristica extends CActiveRecord
 {
-    
-        public static $tipos = array(
-            'Deficiencia',
-            'Patologia',
-            'Sequela',
-            'Ortese/Protese',
-            'Observacao',
-        );
 	/**
 	 * @return string the associated database table name
 	 */
@@ -29,6 +21,14 @@ class Caracteristica extends CActiveRecord
 	{
 		return 'caracteristica';
 	}
+        
+        public static $tipos = array (
+            'Deficiencia',
+            'Patologia',
+            'Sequela',
+            'Ortese/Protese',
+            'Observacao',
+        );
 
 	/**
 	 * @return array validation rules for model attributes.
@@ -108,5 +108,4 @@ class Caracteristica extends CActiveRecord
 	{
 		return parent::model($className);
 	}
-        
 }

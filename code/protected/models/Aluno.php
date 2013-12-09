@@ -46,87 +46,98 @@ class Aluno extends Pessoa
 {
     
         public static $situacoes_escolares = array (
-            'Estuda',
-            'Não Estuda',
-            'Nunca Estudou',
-            'Estudo Concluído',
+            'Estuda' => 'Estuda',
+            'Nao Estuda' => 'Não Estuda',
+            'Nunca Estudou' => 'Nunca Estudou',
+            'Estudo Concluído' => 'Estudo Concluído',
         );
         
         public static $estados_civis = array (
-            'Solteiro',
-            'Casado',
-            'Viúvo',
-            'União Estável',
-            'Divorciado',
-            'Separado',
-            'Outros',
+            'Solteiro' => 'Solteiro',
+            'Casado' => 'Casado',
+            'Viuvo' => 'Viúvo',
+            'Uniao Estavel' => 'União Estável',
+            'Divorciado' => 'Divorciado',
+            'Separado' => 'Separado',
+            'Outros' => 'Outros',
         );
         
         public static $profissoes = array (
-            'Desempregado',
-            'Estudante',
-            'Autônomo',
-            'Sem ocupação',
-            'Funcionário Público',
-            'Inicia. Privada',
-            'Aposentado',
-            'Aposent. Invalidez',
-            'Auxílio doença',
-            'BPC',
-            'Outros',
+            'Desempregado' => 'Desempregado',
+            'Estudante' => 'Estudante',
+            'Autonomo' => 'Autônomo',
+            'Sem ocupacao' => 'Sem ocupação',
+            'Funcionario Publico' => 'Funcionário Público',
+            'Inicia. Privada' => 'Inicia. Privada',
+            'Aposentado' => 'Aposentado',
+            'Aposent. Invalidez' => 'Aposent. Invalidez',
+            'Auxilio doenca' => 'Auxílio doença',
+            'BPC' => 'BPC',
+            'Outros' => 'Outros',
         );
+        public static $triagem = array(
+            'Coracao' => 'Tem problema de Coração?',
+            'Pulmao' => 'Tem problema de Pulmão?',
+            'Figado' => 'Tem problema de Fígado (gastro/hepático)?',
+            'Alergia' => 'Tem problema de Alergia?',
+            'Asma' => 'Tem problema de Asma?',
+            'Pressao' => 'Tem problema de pressão baixa ou alta?',
+            'Diabete' => 'Tem problema de Diabete?',
+            'Doenca' => 'Tem problema de doença sexualmente transmissível?',
+            'Medicamento' => 'Toma medicamento controlado?',
+        );        
         
         public static $zonas = array (
-            'Leste',
-            'Oeste',
-            'Norte',
-            'Sul',
-            'Centro-Oeste',
-            'Centro-Sul',
+            'Leste' => 'Leste',
+            'Oeste' => 'Oeste',
+            'Norte' => 'Norte',
+            'Sul' => 'Sul',
+            'Centro-Oeste' => 'Centro-Oeste',
+            'Centro-Sul' => 'Centro-Sul',
         );
         
         public static $tipos_sanguineos = array (
-            'A positivo',
-            'A negativo',
-            'O positivo',
-            'O negativo',
-            'AB positivo',
-            'AB negativo',
-            'B positivo',
-            'B negativo',
-            'Não Sabe',
+            'A positivo' => 'A positivo',
+            'A negativo' => 'A negativo',
+            'O positivo' => 'O positivo',
+            'O negativo' => 'O negativo',
+            'AB positivo' => 'AB positivo',
+            'AB negativo' => 'AB negativo',
+            'B positivo' => 'B positivo',
+            'B negativo' => 'B negativo',
+            'Não Sabe' => 'Não Sabe',
         );
         
         public static $ocupacoes_imovel = array (
-            'Próprio',
-            'Alugado',
-            'Inválido',
-            'Cedido',
-            'Doação',
-            'Outros',
+            'Próprio' => 'Próprio',
+            'Alugado' => 'Alugado',
+            'Invalido' => 'Inválido',
+            'Cedido' => 'Cedido',
+            'Doacao' => 'Doação',
+            'Outros' => 'Outros',
         );
         
         public static $tipos_habitacao = array (
-            'Alvenaria',
-            'Madeira',
-            'Taipa',
-            'Mista',
-            'Outros',
+            'Alvenaria' => 'Alvenaria',
+            'Madeira' => 'Madeira',
+            'Taipa' => 'Taipa',
+            'Mista' => 'Mista',
+            'Outros' => 'Outros',
         );
         
         public static $instalacoes_hidraulicas = array (
-            'Encanada',
-            'Não Encanada',
-            'Cacimba',
-            'Poço',
-            'Outros',
+            'Encanada' => 'Encanada',
+            'Nao Encanada' => 'Não Encanada',
+            'Cacimba' => 'Cacimba',
+            'Poco' => 'Poço',
+            'Outros' => 'Outros',
         );
         
         public static $instalacoes_eletricas = array (
-            'Ligação Oficial',
-            'Ligação Não Oficial (Gato)',
-            'Não Possui',
-            'Outros',
+            'Ligacao Oficial' => 'Ligação Oficial',
+            'Ligacao Nao Oficial' => 'Ligação Não Oficial (Gato)',
+            'Nao Possui' => 'Não Possui',
+            'Outros' => 'Outros',
         );
         
         public $caracteristicas = array();
@@ -194,22 +205,14 @@ class Aluno extends Pessoa
             $this->save();
         }
         
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-			'atendente' => array(self::BELONGS_TO, 'Funcionario', 'atendente_id'),
-			'pessoa' => array(self::BELONGS_TO, 'Pessoa', 'pessoa_id'),
-			'responsavel' => array(self::BELONGS_TO, 'Responsavel', 'responsavel_id'),
-			'alunoHasCaracteristicas' => array(self::HAS_MANY, 'AlunoHasCaracteristica', 'aluno_id'),
-			'triagems' => array(self::HAS_MANY, 'Triagem', 'aluno_id'),
-			'turmaHasAlunos' => array(self::HAS_MANY, 'TurmaHasAluno', 'aluno_id'),
-		);
-	}
+        public function deleteData() {
+            CaracteristicaAluno::model()->deleteAllByAttributes(array('aluno_id'=>$this->id));
+            Pessoa::model()->deleteByPk($this->pessoa_id);
+            if($this->responsavel_id != null) {
+                Responsavel::model()->deleteByPk($this->responsavel_id);
+            }
+            $this->delete();
+        }
 
 	/**
 	 * @return array customized attribute labels (name=>label)
@@ -266,8 +269,13 @@ class Aluno extends Pessoa
 		// @todo Please modify the following code to remove attributes that should not be searched.
 
 		$criteria=new CDbCriteria;
-
+                $criteria->with = array('pessoa');
 		$criteria->compare('id',$this->id);
+                $criteria->compare('pessoa.nome','',true);
+                $criteria->compare('pessoa.cpf','', true);
+                $criteria->compare('pessoa.rg','', true);
+                $criteria->compare('pessoa.data_de_nascimento','',true);
+                $criteria->compare('pessoa.genero', '', true);
 		$criteria->compare('foto',$this->foto,true,true);
 		$criteria->compare('renda_familiar',$this->renda_familiar,true);
 		$criteria->compare('nome_pai',$this->nome_pai,true);
@@ -299,6 +307,24 @@ class Aluno extends Pessoa
 		));
 	}
 
+                
+	/**
+	 * @return array relational rules.
+	 */
+	public function relations()
+	{
+		// NOTE: you may need to adjust the relation name and the related
+		// class name for the relations automatically generated below.
+		return array(
+			'atendente' => array(self::BELONGS_TO, 'Funcionario', 'atendente_id'),
+			'pessoa' => array(self::BELONGS_TO, 'Pessoa', 'pessoa_id'),
+			'responsavel' => array(self::BELONGS_TO, 'Responsavel', 'responsavel_id'),
+			'alunoHasCaracteristicas' => array(self::HAS_MANY, 'AlunoHasCaracteristica', 'aluno_id'),
+			'triagems' => array(self::HAS_MANY, 'Triagem', 'aluno_id'),
+			'turmaHasAlunos' => array(self::HAS_MANY, 'TurmaHasAluno', 'aluno_id'),
+		);
+	}
+        
 	/**
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!

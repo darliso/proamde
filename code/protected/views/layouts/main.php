@@ -17,13 +17,14 @@
 
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
-
+    
 <body>
 
 <div class="container" id="page">
 
 	<div id="header">
-		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
+            <div id="logo"><img src="<?php echo Yii::app()->request->baseUrl; ?>/css/logo_ufam.JPG"></img>
+		<?php echo CHtml::encode(Yii::app()->name); ?></div>
 	</div><!-- header -->
 
 	<div id="mainmenu">
@@ -40,11 +41,6 @@
 			),
 		)); ?>
 	</div><!-- mainmenu -->
-	<?php if(isset($this->breadcrumbs)):?>
-		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-			'links'=>$this->breadcrumbs,
-		)); ?><!-- breadcrumbs -->
-	<?php endif?>
 
 	<?php echo $content; ?>
 

@@ -15,12 +15,8 @@
 
     <p class="note">Campos com <span class="required">*</span> são obrigatórios.</p>
 
-        <?php echo $form->errorSummary($model); ?>
-        <?php echo $form->errorSummary($pessoa); ?>
-    
-        <div class="row buttons">
-            <?php echo CHtml::submitButton($model->isNewRecord ? '  Cadastrar  ' : '   Salvar   ', array('size' => 13)); ?>
-        </div>
+    <?php echo $form->errorSummary($model); ?>
+    <?php echo $form->errorSummary($pessoa); ?>
 
     <div >
         <?php echo $form->labelEx($pessoa, 'nome'); ?>
@@ -37,24 +33,54 @@
 
     <div >
         <?php echo $form->labelEx($pessoa, 'cpf'); ?>
-        <?php echo $form->textField($pessoa, 'cpf'); ?>
+        <?php
+        $this->widget('CMaskedTextField', array(
+            'model' => $pessoa,
+            'attribute' => 'cpf',
+            'name' => 'cpf',
+            'mask' => '99999999999',
+            'htmlOptions' => array(
+                'style' => 'width:120px;'
+            ),
+        ));
+        ?>
         <?php echo $form->error($pessoa, 'cpf'); ?>
     </div>
     <div >
         <?php echo $form->labelEx($pessoa, 'rg'); ?>
-        <?php echo $form->textField($pessoa, 'rg'); ?>
+        <?php
+        $this->widget('CMaskedTextField', array(
+            'model' => $pessoa,
+            'attribute' => 'rg',
+            'name' => 'rg',
+            'mask' => '99999999',
+            'htmlOptions' => array(
+                'style' => 'width:100px;'
+            ),
+        ));
+        ?>
         <?php echo $form->error($pessoa, 'rg'); ?>
     </div>
     <div >
         <?php echo $form->labelEx($pessoa, 'data_de_nascimento'); ?>
-        <?php echo $form->textField($pessoa, 'data_de_nascimento', array('maxlength' => 8)); ?>
+        <?php
+        $this->widget('CMaskedTextField', array(
+            'model' => $pessoa,
+            'attribute' => 'data_de_nascimento',
+            'name' => 'date',
+            'mask' => '99/99/9999',
+            'htmlOptions' => array(
+                'style' => 'width:100px;'
+            ),
+        ));
+        ?>
         <?php echo $form->error($pessoa, 'data_de_nascimento'); ?>
     </div>
     <div >
         <?php echo $form->labelEx($pessoa, 'genero'); ?>
-        <?php echo $form->dropDownList($pessoa, 'genero', array('Masculino', 'Feminino'), array('empty' => '')); ?>
+        <?php echo $form->dropDownList($pessoa, 'genero', array('Masculino'=>'Masculino', 'Feminino'=>'Feminino'), array('empty' => '')); ?>
     </div>
-    
+
     <div >
         <?php echo $form->labelEx($pessoa, 'naturalidade'); ?>
         <?php echo $form->textField($pessoa, 'naturalidade', array('size' => 50, 'maxlength' => 45)); ?>
@@ -74,7 +100,7 @@
 
     <div >
         <?php echo $form->labelEx($model, 'zona'); ?>
-        <?php echo CHtml::dropDownList('zona', $model, Aluno::$zonas);?>
+        <?php echo CHtml::dropDownList('zona', $model, Aluno::$zonas, array('empty' => '')); ?>
     </div>
     <div >
         <?php echo $form->labelEx($model, 'ponto_referencia'); ?>
@@ -89,7 +115,17 @@
 
     <div >
         <?php echo $form->labelEx($pessoa, 'cep'); ?>
-        <?php echo $form->textField($pessoa, 'cep') ?>
+        <?php
+        $this->widget('CMaskedTextField', array(
+            'model' => $pessoa,
+            'attribute' => 'cep',
+            'name' => 'cep',
+            'mask' => '99999999',
+            'htmlOptions' => array(
+                'style' => 'width:100px;'
+            ),
+        ));
+        ?>
         <?php echo $form->error($pessoa, 'cep'); ?>
     </div>
 
@@ -214,7 +250,17 @@
 
     <div >
         <?php echo $form->labelEx($model, 'inicio_deficiencia'); ?>
-        <?php echo $form->textField($model, 'inicio_deficiencia', array('size' => 20, 'maxlength' => 45)); ?>
+        <?php
+        $this->widget('CMaskedTextField', array(
+            'model' => $model,
+            'attribute' => 'inicio_deficiencia',
+            'name' => 'inicio_deficiencia',
+            'mask' => '99/99/9999',
+            'htmlOptions' => array(
+                'style' => 'width:100px;'
+            ),
+        ));
+        ?>
         <?php echo $form->error($model, 'inicio_deficiencia'); ?>
     </div>
 
@@ -227,44 +273,89 @@
     <div >
         <?php echo $form->labelEx($model, 'foto'); ?>
         <?php echo $form->textField($model, 'foto', array('size' => 70, 'maxlength' => 250)); ?>
-        <?php echo CHtml::button('  Obter Arquivo  ', array('size' => 13)); ?>
+        <?php
+        $this->widget('CMultiFileUpload', array(
+            'name' => 'files',
+            'accept' => 'jpg|png',
+            'max' => 3,
+            'remove' => Yii::t('ui', 'Remove'),
+            'denied' => 'Acesso negado ao Arquivo', // message that is displayed when a file type is not allowed
+            'duplicate' => 'Arquivo duplicado', //message that is displayed when a file appears twice
+            'htmlOptions' => array('size' => 25),
+        ));
+        ?>
         <?php echo $form->error($model, 'foto'); ?>
     </div>
-    
     <br/>
     <br/>
-    <br/>
-    <div >
-    <!-- search-form -->
 
-    
-    <?php 
-//    foreach(Caracteristica::$tipos as $tipo) {
-//         echo CHtml::checkBoxList('list_caracteristicas',CHtml::listData(Caracteristica::model()-> 
-//                 findAll(), 'nome'), $caracteristica);
-//         
-//    }
-   
-    
-        $caracteristicas = Caracteristica::model()->findAll();
-        foreach( Caracteristica::$tipos as $tipo ) {
-            echo '<div class="column" style="max-width: 14">';
-            echo "<b>$tipo</b>";
-            foreach($caracteristicas as $caract) {
-                if($caract->tipo == $tipo) {
-                    echo '<div class="row" style="background: #FFFFFF">';
-                    echo $form->radioButton($pessoa, 'genero', array( //TODO: codigo deve ser alterado.
-                    'value'=>$caract->nome,
-                    'uncheckValue'=>null)).' ';
-                    echo $caract->nome;
-                    echo '</div>';
-                }
+    <?php
+    $caracteristicas = Caracteristica::model()->findAll();
+    echo '<p>Caracteristicas:</p>';
+    foreach (Caracteristica::$tipos as $tipo) {
+        echo '<div class="column" style="max-width: 14">';
+        echo "<b>$tipo</b>";
+        foreach ($caracteristicas as $caract) {
+            if ($caract->tipo == $tipo) {
+                echo '<div class="row" style="background: #FFFFFF">';
+                echo $form->checkBox($caracteristica, 'nome', array(//TODO: codigo deve ser alterado.
+                    'name' => 'check' . $caract->id,
+                    'value' => $caract->nome,
+                    'checked'=> in_array($caract->nome, $this->info) ? '1' : '0', 
+                    'uncheckValue' => null)) . ' ';
+                echo $caract->nome;
+                echo '</div>';
             }
-            echo '</div>';
         }
+        echo '</div>';
+    }
     ?>
-    </div >
-    
+
+    <div class="column">
+    <?php
+    echo "<br/><br/><br/>Triagem:<br/><br/>";
+    echo '<Table BORDER="1">';
+    echo "<TR><TD>Nome</TD><TD> SIM</TD><TD>NÃO</TD><TD>Observação</TD>";
+    foreach (Aluno::$triagem as $key => $value) {
+            echo '<TR>';
+            echo "<TD>$value</TD>";
+            echo "<TD>";
+            echo $form->radioButton($caracteristica, 'nome', array(//TODO: codigo deve ser alterado.
+                'name' => 'check' . $key,
+                'value' => 'Sim',
+                'checked'=> in_array($key, $this->info) ? '1' : '0',
+                'uncheckValue' => null)) . ' ';
+            echo '</TD>';
+            echo "<TD>";
+            echo $form->radioButton($caracteristica, 'nome', array(//TODO: codigo deve ser alterado.
+                'name' => 'check' . $key,
+                'value' => 'Não',
+                'checked'=> in_array($key, $this->info) ? '0' : '1',
+                'uncheckValue' => null)) . ' ';
+            echo '</TD>';
+            echo "<TD>";
+            echo $form->textField($caracteristica, 'nome', array('name'=>'obs'.$key, 'size' => 50, 'maxlength' => 250));
+            echo '</TD>';
+            echo '</TR>';
+    }
+    echo '</Table>';
+    ?>
+    </div>
+
+    <br/>
+
+    <div class="column">
+        <?php
+        $this->widget('zii.widgets.jui.CJuiButton', array(
+            'buttonType' => 'submit',
+            'name' => 'btnSubmit',
+            'value' => '1',
+            'caption' => $model->isNewRecord ? '  Cadastrar  ' : '   Salvar   ',
+            'htmlOptions' => array('class' => 'ui-button-primary')
+        ));
+        ?>
+    </div>
+
     <br/>
     <br/>
 

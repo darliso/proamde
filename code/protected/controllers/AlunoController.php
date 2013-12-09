@@ -9,6 +9,9 @@ class AlunoController extends Controller {
     public $layout = '//layouts/column2';
     public $caracteristics;
 
+    public $info;
+    public $obs;
+    
     /**
      * @return array action filters
      */
@@ -19,6 +22,95 @@ class AlunoController extends Controller {
         );
     }
 
+      public function actions()
+        {
+                return array(
+                        'suggestCountry'=>array(
+                                'class'=>'ext.actions.XSuggestAction',
+                                'modelName'=>'Country',
+                                'methodName'=>'suggest',
+                        ),
+                        'legacySuggestCountry'=>array(
+                                'class'=>'ext.actions.XLegacySuggestAction',
+                                'modelName'=>'Country',
+                                'methodName'=>'legacySuggest',
+                        ),
+                        'fillTree'=>array(
+                                'class'=>'ext.actions.XFillTreeAction',
+                                'modelName'=>'Menu',
+                                'showRoot'=>false
+                        ),
+                        'treePath'=>array(
+                                'class'=>'ext.actions.XAjaxEchoAction',
+                                'modelName'=>'Menu',
+                                'attributeName'=>'pathText',
+                        ),
+                        'uploadFile'=>array(
+                                'class'=>'ext.actions.XHEditorUpload',
+                        ),
+                        'suggestAuPlaces'=>array(
+                                'class'=>'ext.actions.XSuggestAction',
+                                'modelName'=>'AdminUnit',
+                                'methodName'=>'suggestPlaces',
+                                'limit'=>30
+                        ),
+                        'suggestAuHierarchy'=>array(
+                                'class'=>'ext.actions.XSuggestAction',
+                                'modelName'=>'AdminUnit',
+                                'methodName'=>'suggestHierarchy',
+                                'limit'=>30
+                        ),
+                        'suggestLastname'=>array(
+                                'class'=>'ext.actions.XSuggestAction',
+                                'modelName'=>'Person',
+                                'methodName'=>'suggestLastname',
+                                'limit'=>30
+                        ),
+                        'fillAuTree'=>array(
+                                'class'=>'ext.actions.XFillTreeAction',
+                                'modelName'=>'AdminUnit',
+                                'showRoot'=>false,
+                        ),
+                        'viewUnitPath'=>array(
+                                'class'=>'ext.actions.XAjaxEchoAction',
+                                'modelName'=>'AdminUnit',
+                                'attributeName'=>'rootlessPath',
+                        ),
+                        'viewUnitLabel'=>array(
+                                'class'=>'ext.actions.XAjaxEchoAction',
+                                'modelName'=>'AdminUnit',
+                                'attributeName'=>'label',
+                        ),
+                        'initPerson'=>array(
+                                'class'=>'ext.actions.XSelect2InitAction',
+                                'modelName'=>'Person',
+                                'textField'=>'fullname',
+                        ),
+                        'suggestPerson'=>array(
+                                'class'=>'ext.actions.XSelect2SuggestAction',
+                                'modelName'=>'Person',
+                                'methodName'=>'suggestPerson',
+                                'limit'=>30
+                        ),
+                        'suggestPersonGroupCountry'=>array(
+                                'class'=>'ext.actions.XSelect2SuggestAction',
+                                'modelName'=>'Person',
+                                'methodName'=>'suggestPersonGroupCountry',
+                                'limit'=>30
+                        ),
+                        'addTabularInputs'=>array(
+                                'class'=>'ext.actions.XTabularInputAction',
+                                'modelName'=>'Person',
+                                'viewName'=>'/site/extensions/_tabularInput',
+                        ),
+                        'addTabularInputsAsTable'=>array(
+                                'class'=>'ext.actions.XTabularInputAction',
+                                'modelName'=>'Person',
+                                'viewName'=>'/site/extensions/_tabularInputAsTable',
+                        ),
+                );
+        }
+    
     /**
      * Specifies the access control rules.
      * This method is used by the 'accessControl' filter.
@@ -61,18 +153,21 @@ class AlunoController extends Controller {
     public function actionCreate() {
         $model = new Aluno;
         $pessoa = new Pessoa;
+        $this->info = array();
+        $this->obs = array();
         
         $caracteristica = new Caracteristica('search');
         $caracteristica->unsetAttributes();  // clear any default values
         if (isset($_GET['Caracteristica']))
             $caracteristica->attributes = $_GET['Caracteristica'];
 
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+        $this->setCaracteristicasListener();
+        
         if (isset($_POST['Aluno'], $_POST['Pessoa'])) {
             $model->attributes = $_POST['Aluno'];
             $pessoa->attributes = $_POST['Pessoa'];
-
+            $position = 0;
+            
             $valid = $model->validate();
             $valid = $pessoa->validate() && $valid;
             if ($valid) {
@@ -82,6 +177,7 @@ class AlunoController extends Controller {
                 $model->pessoa_id = $pessoa->id;
 
                 $model->save(false);
+                $this->saveCaracteristicas($model->id, $this->info);
                 $this->redirect(array('view', 'id' => $model->id));
             }
         }
@@ -93,7 +189,47 @@ class AlunoController extends Controller {
             'caracteristica' => $caracteristica
         ));
     }
-
+    
+    public function setCaracteristicasListener() {
+                $position = 0;
+        foreach(Caracteristica::model()->findAll() as $caract) {
+                
+                if(isset($_POST['check'.$caract->id])) {
+                    $checkboxValue = $_POST['check'.$caract->id];
+                    $this->info[$position] = $checkboxValue;
+                    $position++;
+                }
+        }
+        
+        foreach(Aluno::$triagem as $key => $value) {
+            if(isset($_POST['check'.$key])) {
+                $result = $_POST['check'.$key];
+                if($result == 'Sim') {
+                    $this->info[$position] = $key;
+                    if(isset($_POST['obs'.$key])) {
+                        $obs[$key] = $_POST['obs'.$key];
+                    }
+                    $position++;
+                }
+            }
+        }
+    }
+    
+    public function saveCaracteristicas($aluno_id, $info) {
+        if($info != null && !empty($info)) {
+            foreach($info as $name) {
+                $caracteristicaAluno = new CaracteristicaAluno;
+                $caracteristica_id = Caracteristica::model()->findByAttributes(array('nome'=>$name))->id;
+                $caracteristicaAluno->aluno_id = $aluno_id;
+                $caracteristicaAluno->caracteristica_id = $caracteristica_id;
+                if(array_key_exists($name, $this->obs)) {
+                    $caracteristicaAluno->observacao = $obs[$name];
+                }
+                $caracteristicaAluno->save();
+            }
+        }
+    }
+    
     /**
      * Updates a particular model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -135,7 +271,7 @@ class AlunoController extends Controller {
      * @param integer $id the ID of the model to be deleted
      */
     public function actionDelete($id) {
-        $this->loadModel($id)->delete();
+        $this->loadModel($id)->deleteData();
 
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if (!isset($_GET['ajax']))
@@ -180,9 +316,20 @@ class AlunoController extends Controller {
         if ($model->responsavel_id != null) {
             $model->responsavel = Responsavel::model()->findByPk($model->responsavel_id);
         }
+        $info = array();
+        $info = $this->loadCaracteristicas($model->id);
         if ($model === null)
             throw new CHttpException(404, 'Página não encontrada.');
         return $model;
+    }
+    
+    public function loadCaracteristicas($id) {
+        $list = CaracteristicaAluno::model()->findAllByAttributes(array('aluno_id'=>$id));
+        $position = 0;
+        foreach($list as $row) {
+            $this->info[$position] = $row->caracteristica_id;
+            $this->obs[$row->caracteristica_id] = $row->observacao;
+        }
     }
 
     /**
@@ -213,4 +360,29 @@ class AlunoController extends Controller {
         echo "</tbody></table>";
     }
 
+    public function actionUpload()
+        {
+                if(isset($_FILES['files']))
+                {
+                        // delete old files
+                        foreach($this->findFiles() as $filename) {
+                                unlink(Yii::app()->params['uploadDir'].$filename);
+                        }
+                                
+
+                        //upload new files
+                        foreach($_FILES['files']['name'] as $key=>$filename) {
+                                move_uploaded_file($_FILES['files']['tmp_name'][$key],Yii::app()->params['uploadDir'].$filename);
+                        }
+                }
+                $this->redirect(array('site/widget','view'=>'multifileupload'));
+        }
+ 
+         /**
+         * @return array filename
+         */
+        public function findFiles()
+        {
+                return array_diff(scandir(Yii::app()->params['uploadDir']), array('.', '..'));
+        }
 }

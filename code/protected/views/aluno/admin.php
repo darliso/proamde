@@ -40,12 +40,11 @@ $('.search-form form').submit(function(){
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-                'id',
-		'responsavel_id',
-		'pessoa_id',
-		'atendente_id',
-		'foto',
-		'renda_familiar',
+                'pessoa.nome',
+                'pessoa.cpf',
+                'pessoa.rg',
+                'pessoa.data_de_nascimento',
+                'pessoa.genero',
 		array(
 			'class'=>'CButtonColumn',
 		),
