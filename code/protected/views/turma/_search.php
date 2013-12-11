@@ -36,6 +36,11 @@
 		<?php echo $form->textField($model,'vagas'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($model,'unica'); ?>
+		<?php echo $form->checkBox($model,'unica'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>

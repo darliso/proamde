@@ -70,6 +70,7 @@ class TurmaController extends Controller
 		if(isset($_POST['Turma']))
 		{
 			$model->attributes=$_POST['Turma'];
+                        $model->periodo_id=1;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

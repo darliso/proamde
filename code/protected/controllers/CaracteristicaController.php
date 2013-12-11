@@ -66,8 +66,6 @@ class CaracteristicaController extends Controller
             foreach ($rows as $row) {
                 $command = Yii::app()->db->createCommand($row)->execute();
             }
-           
-            
         }
         
 	/**
@@ -77,7 +75,10 @@ class CaracteristicaController extends Controller
 	public function actionCreate()
 	{
                 $model = new Caracteristica;
-		//$this->addCaracteristicas(); //utilizado no primeiro uso
+                $list = Caracteristica::model()->findAll();
+		if(empty($list)) {
+                    $this->addCaracteristicas(); //utilizado no primeiro uso
+                }
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);

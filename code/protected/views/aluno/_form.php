@@ -100,7 +100,7 @@
 
     <div >
         <?php echo $form->labelEx($model, 'zona'); ?>
-        <?php echo CHtml::dropDownList('zona', $model, Aluno::$zonas, array('empty' => '')); ?>
+        <?php echo $form->dropDownList($model, 'zona', Aluno::$zonas, array('empty' => '')); ?>
     </div>
     <div >
         <?php echo $form->labelEx($model, 'ponto_referencia'); ?>

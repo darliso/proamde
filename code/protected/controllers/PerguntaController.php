@@ -63,7 +63,12 @@ class PerguntaController extends Controller
 	public function actionCreate()
 	{
 		$model=new Pergunta;
-
+                $list = Pergunta::model()->findAll();
+                
+                if(empty($list)) {
+                    addPerguntas();
+                }
+                
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 

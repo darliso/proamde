@@ -56,6 +56,15 @@ class ClasseController extends Controller
 		));
 	}
 
+        private function addClasses() {
+            $query = file_get_contents(dirname(__FILE__).'/../data/classes_insert.sql');
+            $rows = explode(';',$query);
+            foreach ($rows as $row) {
+                $command = Yii::app()->db->createCommand($row)->execute();
+            }
+        }
+        
+        
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
@@ -63,7 +72,10 @@ class ClasseController extends Controller
 	public function actionCreate()
 	{
 		$model=new Classe;
-
+                $list = Classe::model()->findAll();
+                if(empty($list)) {
+                    $this->addClasses();
+                }
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 

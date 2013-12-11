@@ -8,15 +8,15 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Turma', 'url'=>array('index')),
-	array('label'=>'Create Turma', 'url'=>array('create')),
-	array('label'=>'Update Turma', 'url'=>array('update', 'id'=>$model->id)),
-	array('label'=>'Delete Turma', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Turma', 'url'=>array('admin')),
+	array('label'=>'Listar Turmas', 'url'=>array('index')),
+	array('label'=>'Criar Nova Turma', 'url'=>array('create')),
+	array('label'=>'Alterar Esta Turma', 'url'=>array('update', 'id'=>$model->id)),
+	array('label'=>'Deletar Esta Turma', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Gerenciar Turmas', 'url'=>array('admin')),
 );
 ?>
 
-<h1>View Turma #<?php echo $model->id; ?></h1>
+<h1>Detalhes da Turma #<?php echo $model->nome; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
@@ -26,5 +26,6 @@ $this->menu=array(
 		'periodo_id',
 		'nome',
 		'vagas',
+		'unica',
 	),
 )); ?>

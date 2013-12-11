@@ -9,6 +9,7 @@
  * @property integer $periodo_id
  * @property string $nome
  * @property integer $vagas
+ * @property boolean $unica
  *
  * The followings are the available model relations:
  * @property Periodo $periodo
@@ -33,12 +34,13 @@ class Turma extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('classe_id, periodo_id, nome, vagas', 'required'),
+			array('classe_id, nome, vagas', 'required'),
 			array('classe_id, periodo_id, vagas', 'numerical', 'integerOnly'=>true),
 			array('nome', 'length', 'max'=>45),
+			array('unica', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, classe_id, periodo_id, nome, vagas', 'safe', 'on'=>'search'),
+			array('id, classe_id, periodo_id, nome, vagas, unica', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,6 +69,7 @@ class Turma extends CActiveRecord
 			'periodo_id' => 'Periodo',
 			'nome' => 'Nome',
 			'vagas' => 'Vagas',
+			'unica' => 'Unica',
 		);
 	}
 
@@ -85,14 +88,18 @@ class Turma extends CActiveRecord
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
-
+                $this->classe = Classe::model()->findAllByAttributes(array('id'=>$this->classe_id));
+                $this->periodo = Classe::model()->findAllByAttributes(array('id'=>$this->periodo_id));
 		$criteria=new CDbCriteria;
-
+                $criteria->with = array('classe', 'periodo');
 		$criteria->compare('id',$this->id);
+                $criteria->compare('classe.nome','',true);
+                $criteria->compare('periodo.ano','',true);
 		$criteria->compare('classe_id',$this->classe_id);
 		$criteria->compare('periodo_id',$this->periodo_id);
 		$criteria->compare('nome',$this->nome,true);
 		$criteria->compare('vagas',$this->vagas);
+		$criteria->compare('unica',$this->unica);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

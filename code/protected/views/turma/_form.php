@@ -15,32 +15,40 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Campos com <span class="required">*</span> são Obrigatórios.</p>
 
 	<?php echo $form->errorSummary($model); ?>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'classe_id'); ?>
-		<?php echo $form->textField($model,'classe_id'); ?>
-		<?php echo $form->error($model,'classe_id'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'periodo_id'); ?>
-		<?php echo $form->textField($model,'periodo_id'); ?>
-		<?php echo $form->error($model,'periodo_id'); ?>
-	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'nome'); ?>
 		<?php echo $form->textField($model,'nome',array('size'=>45,'maxlength'=>45)); ?>
 		<?php echo $form->error($model,'nome'); ?>
 	</div>
+        
+	<div class="row">
+		<?php echo $form->labelEx($model,'classe_id'); ?>
+                <?php 
+                    $list = Classe::model()->findAll(array(), array('id','nome'));
+                    $result = array();
+                    $position = 1;
+                    foreach($list as $class) {
+                        $result[(string)$class->id] = (string)$class->nome;
+                        $position++;
+                    }
+                    echo $form->dropDownList($model,'classe_id', $result , array('empty' => '')); 
+                ?>
+	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'vagas'); ?>
 		<?php echo $form->textField($model,'vagas'); ?>
 		<?php echo $form->error($model,'vagas'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'unica'); ?>
+		<?php echo $form->checkBox($model,'unica'); ?>
+		<?php echo $form->error($model,'unica'); ?>
 	</div>
 
 	<div class="row buttons">

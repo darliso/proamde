@@ -267,7 +267,6 @@ class Aluno extends Pessoa
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
-
 		$criteria=new CDbCriteria;
                 $criteria->with = array('pessoa');
 		$criteria->compare('id',$this->id);

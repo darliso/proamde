@@ -1,0 +1,11 @@
+INSERT INTO classe (id, nome, descricao) VALUES ('1', 'Infantil de 02 a 06 Anos', 'Crianças de 02 a 06 Anos');
+INSERT INTO classe (id, nome, descricao) VALUES ('2', 'Infantil de 07 a 11 Anos', 'Crianças de 07 a 11 Anos');
+INSERT INTO classe (id, nome, descricao) VALUES ('3', 'Infantil de 07 a 11 Anos', 'Crianças de 07 a 11 Anos');
+INSERT INTO classe (id, nome, descricao) VALUES ('4', 'Adolescentes', 'Adolescentes de 12 a 15 Anos');
+INSERT INTO classe (id, nome, descricao) VALUES ('5', 'Paralisia Cerebral (PC)', 'Pessoas com Paralisia Cerebral');
+INSERT INTO classe (id, nome, descricao) VALUES ('6', 'Adultos', 'Pessoas Adultas');
+INSERT INTO classe (id, nome, descricao) VALUES ('7', 'Adultos Master', 'Pessoas Adultas Master');
+INSERT INTO classe (id, nome, descricao) VALUES ('8', 'Sindromes Neurológicas', 'Pessoas com Síndromes Neurológicas');
+INSERT INTO classe (id, nome, descricao) VALUES ('9', 'AVC/TCE', 'Pessoas que tiveram AVC/TCE');
+INSERT INTO classe (id, nome, descricao) VALUES ('10', 'Cadeirantes', 'Pessoas Cadeirantes');
+INSERT INTO classe (id, nome, descricao) VALUES ('11', 'Natação', 'Atividades de Natação');

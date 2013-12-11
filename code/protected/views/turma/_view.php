@@ -25,5 +25,9 @@
 	<?php echo CHtml::encode($data->vagas); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('unica')); ?>:</b>
+	<?php echo CHtml::encode($data->unica); ?>
+	<br />
+
 
 </div>
