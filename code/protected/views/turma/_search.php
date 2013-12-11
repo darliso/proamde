@@ -22,18 +22,13 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'polo_id'); ?>
-		<?php echo $form->textField($model,'polo_id'); ?>
+		<?php echo $form->label($model,'periodo_id'); ?>
+		<?php echo $form->textField($model,'periodo_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($model,'nome'); ?>
 		<?php echo $form->textField($model,'nome',array('size'=>45,'maxlength'=>45)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'ano'); ?>
-		<?php echo $form->textField($model,'ano'); ?>
 	</div>
 
 	<div class="row">

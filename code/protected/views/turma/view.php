@@ -23,9 +23,8 @@ $this->menu=array(
 	'attributes'=>array(
 		'id',
 		'classe_id',
-		'polo_id',
+		'periodo_id',
 		'nome',
-		'ano',
 		'vagas',
 	),
 )); ?>

@@ -26,21 +26,15 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'polo_id'); ?>
-		<?php echo $form->textField($model,'polo_id'); ?>
-		<?php echo $form->error($model,'polo_id'); ?>
+		<?php echo $form->labelEx($model,'periodo_id'); ?>
+		<?php echo $form->textField($model,'periodo_id'); ?>
+		<?php echo $form->error($model,'periodo_id'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'nome'); ?>
 		<?php echo $form->textField($model,'nome',array('size'=>45,'maxlength'=>45)); ?>
 		<?php echo $form->error($model,'nome'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'ano'); ?>
-		<?php echo $form->textField($model,'ano'); ?>
-		<?php echo $form->error($model,'ano'); ?>
 	</div>
 
 	<div class="row">

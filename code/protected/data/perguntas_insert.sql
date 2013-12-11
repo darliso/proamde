@@ -24,6 +24,8 @@ INSERT INTO pergunta (pergunta, area) VALUES ('Saltar com o pé direito (parado 
 INSERT INTO pergunta (pergunta, area) VALUES ('Saltar com os pés unidos', 'LOCOMOCAO');
 INSERT INTO pergunta (pergunta, area) VALUES ('Saltar com os pés alternadamente', 'LOCOMOCAO');
 INSERT INTO pergunta (pergunta, area) VALUES ('Saltar no mesmo lugar', 'LOCOMOCAO');
+INSERT INTO pergunta (pergunta, area) VALUES ('Locomoção(Marcha/ cadeira de rodas)', 'LOCOMOCAO');
+INSERT INTO pergunta (pergunta, area) VALUES ('Locomoção(Escadas)', 'LOCOMOCAO');
 
 
 INSERT INTO pergunta (pergunta, area) VALUES ('Impulsionar a cadeira de Rodas para frente', 'LOCOMOCAO EM CADEIRA DE RODAS');
@@ -116,3 +118,95 @@ INSERT INTO pergunta (pergunta, area) VALUES ('Apontar os braços', 'CONSCIENCIA
 INSERT INTO pergunta (pergunta, area) VALUES ('Apontar as pernas', 'CONSCIENCIA CORPORAL');
 INSERT INTO pergunta (pergunta, area) VALUES ('Apontar os joelhos', 'CONSCIENCIA CORPORAL');
 INSERT INTO pergunta (pergunta, area) VALUES ('Apontar os pés', 'CONSCIENCIA CORPORAL');
+
+INSERT INTO pergunta (pergunta, area) VALUES ('Pegar a letra de EVA no lado direito e com a mão direita', 'ORIENTACAO ESPACO-TEMPORAL');
+INSERT INTO pergunta (pergunta, area) VALUES ('Pegar a letra de EVA no lado direito e com a mão esquerda', 'ORIENTACAO ESPACO-TEMPORAL');
+INSERT INTO pergunta (pergunta, area) VALUES ('Colocar a lera de EVA dentro de uma bacia', 'ORIENTACAO ESPACO-TEMPORAL');
+INSERT INTO pergunta (pergunta, area) VALUES ('Colocar a lera de EVA fora de uma bacia', 'ORIENTACAO ESPACO-TEMPORAL');
+
+INSERT INTO pergunta (pergunta, area) VALUES ('Realiza toque?', 'INICIACAO DESPORTIVA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Realiza Manchete?', 'INICIACAO DESPORTIVA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Realiza um lance à cesta?', 'INICIACAO DESPORTIVA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Realiza arremesso na cexta?', 'INICIACAO DESPORTIVA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Realiza arremesso no gol mão direita?', 'INICIACAO DESPORTIVA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Realiza arremesso no gol mão esquerda?', 'INICIACAO DESPORTIVA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Realiza quiques parado mão direita?', 'INICIACAO DESPORTIVA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Realiza quiques parado mão esquerda?', 'INICIACAO DESPORTIVA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Quica em deslocamento mão direita?', 'INICIACAO DESPORTIVA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Quica em deslocamento mão esquerda?', 'INICIACAO DESPORTIVA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Chuta a bola no alvo indicado pé direito', 'INICIACAO DESPORTIVA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Chuta a bola no alvo indicado pé esquerdo', 'INICIACAO DESPORTIVA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Realizar drible parado com a mão direita', 'INICIACAO DESPORTIVA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Realizar drible parado com a mão esquerda', 'INICIACAO DESPORTIVA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Realizar drible em deslocamento com a mão direita', 'INICIACAO DESPORTIVA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Realizar drible em deslocamento com a mão esquerda', 'INICIACAO DESPORTIVA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Chuta a bola no alvo indicado com o pé direito', 'INICIACAO DESPORTIVA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Chuta a bola no alvo indicado com o pé esquerdo', 'INICIACAO DESPORTIVA');
+
+INSERT INTO pergunta (pergunta, area) VALUES ('Manter a cabeça ereta', 'HABILIDADE RUDIMENTAR ESTATICA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Manter-se sentado com auxílio de acompanhante no tatame', 'HABILIDADE RUDIMENTAR ESTATICA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Manter-se sentado com apoio de braços no tatame', 'HABILIDADE RUDIMENTAR ESTATICA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Manter-se sentado sem auxilio no tatame', 'HABILIDADE RUDIMENTAR ESTATICA');
+
+INSERT INTO pergunta (pergunta, area) VALUES ('Cadeira de rodas para cadeira normal', 'TRANSFERENCIA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Cadeira normal para cadeira de rodas', 'TRANSFERENCIA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Cadeira normal para colçhão', 'TRANSFERENCIA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Colçhão para cadeira de rodas', 'TRANSFERENCIA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Transferências(leito, cadeira, cadeira de rodas)', 'TRANSFERENCIA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Transferências(vaso sanitário)', 'TRANSFERENCIA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Transferências Banheira ou Chuveiro', 'TRANSFERENCIA');
+
+INSERT INTO pergunta (pergunta, area) VALUES ('Colchão de Atletismo', 'QUEDA E RECUPERACAO');
+INSERT INTO pergunta (pergunta, area) VALUES ('Banco Sueco', 'QUEDA E RECUPERACAO');
+INSERT INTO pergunta (pergunta, area) VALUES ('Chão', 'QUEDA E RECUPERACAO');
+
+INSERT INTO pergunta (pergunta, area) VALUES ('Veste-se sozinho', 'ATIVIDADES DA VIDA DIARIA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Despe-se sozinho', 'ATIVIDADES DA VIDA DIARIA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Sai de casa sozinho', 'ATIVIDADES DA VIDA DIARIA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Pega ônibus sozinho', 'ATIVIDADES DA VIDA DIARIA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Alimenta-se sozinho', 'ATIVIDADES DA VIDA DIARIA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Veste-se sozinho', 'ATIVIDADES DA VIDA DIARIA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Toma banho sozinho', 'ATIVIDADES DA VIDA DIARIA');
+
+INSERT INTO pergunta (pergunta, area) VALUES ('Peso', 'AVALIACAO FISICA');
+INSERT INTO pergunta (pergunta, area) VALUES ('Altura', 'AVALIACAO FISICA');
+
+INSERT INTO pergunta (pergunta, area) VALUES ('Tônus Muscular', 'ANNAMINESE');
+INSERT INTO pergunta (pergunta, area) VALUES ('Topografia', 'ANNAMINESE');
+INSERT INTO pergunta (pergunta, area) VALUES ('Encurtamento', 'ANNAMINESE');
+INSERT INTO pergunta (pergunta, area) VALUES ('Contratura', 'ANNAMINESE');
+INSERT INTO pergunta (pergunta, area) VALUES ('Deformidades', 'ANNAMINESE');
+
+INSERT INTO pergunta (pergunta, area) VALUES ('Independencia completa (em segurança, em tempo normal)', 'NIVEIS');
+INSERT INTO pergunta (pergunta, area) VALUES ('Independencia modificada (recursos auxiliares)', 'NIVEIS');
+INSERT INTO pergunta (pergunta, area) VALUES ('Supervisao ou preparacao', 'NIVEIS');
+INSERT INTO pergunta (pergunta, area) VALUES ('Assistencia com contato mínimo (individuo >= 75%)', 'NIVEIS');
+INSERT INTO pergunta (pergunta, area) VALUES ('Assistencia moderada (individuo >= 50%)', 'NIVEIS');
+INSERT INTO pergunta (pergunta, area) VALUES ('Assistencia máxima (individuo >= 25% do trabalho)', 'NIVEIS');
+INSERT INTO pergunta (pergunta, area) VALUES ('Assistencia total(individuo < 25%)', 'NIVEIS');
+
+INSERT INTO pergunta (pergunta, area) VALUES ('Alimentação', 'AUTO-CUIDADO');
+INSERT INTO pergunta (pergunta, area) VALUES ('Higiene Pessoa (cuidado de apresentação e aparência', 'AUTO-CUIDADO');
+INSERT INTO pergunta (pergunta, area) VALUES ('Banho(limpeza do corpo)', 'AUTO-CUIDADO');
+INSERT INTO pergunta (pergunta, area) VALUES ('Vestir a metade superior do corpo', 'AUTO-CUIDADO');
+INSERT INTO pergunta (pergunta, area) VALUES ('Vestir a metade inferior do corpo', 'AUTO-CUIDADO');
+INSERT INTO pergunta (pergunta, area) VALUES ('Uso do vaso sanitário', 'AUTO-CUIDADO');
+
+INSERT INTO pergunta (pergunta, area) VALUES ('Controle de Urina', 'CONTROLE ESFINCTERIANO');
+INSERT INTO pergunta (pergunta, area) VALUES ('Controle de Fezes', 'CONTROLE ESFINCTERIANO');
+
+INSERT INTO pergunta (pergunta, area) VALUES ('Compreensão (Auditivo/Visual)', 'COMUNICACAO');
+INSERT INTO pergunta (pergunta, area) VALUES ('Expressão (Vocal/Não Vocal)', 'COMUNICACAO');
+
+INSERT INTO pergunta (pergunta, area) VALUES ('Integração social', 'COGNICAO SOCIAL');
+INSERT INTO pergunta (pergunta, area) VALUES ('Resolução de Problemas', 'COGNICAO SOCIAL');
+INSERT INTO pergunta (pergunta, area) VALUES ('Memória', 'COGNICAO SOCIAL');
+
+INSERT INTO classe (nome, descricao) VALUES ('Infantil de 02 a 06 Anos', 'Crianças de 02 a 06 Anos');
+INSERT INTO classe (nome, descricao) VALUES ('Infantil de 07 a 11 Anos', 'Crianças de 07 a 11 Anos');
+INSERT INTO classe (nome, descricao) VALUES ('Infantil de 07 a 11 Anos', 'Crianças de 07 a 11 Anos');
+INSERT INTO classe (nome, descricao) VALUES ('Adolescentes', 'Adolescentes de 12 a 15 Anos');
+INSERT INTO classe (nome, descricao) VALUES ('Paralisia Cerebral (PC)', 'Pessoas com Paralisia Cerebral');
+INSERT INTO classe (nome, descricao) VALUES ('Adultos', 'Pessoas Adultas');
+INSERT INTO classe (nome, descricao) VALUES ('Adultos Master', 'Pessoas Adultas Master');
+INSERT INTO classe (nome, descricao) VALUES ('Sindromes Neurológicas', 'Pessoas com Síndromes Neurológicas');

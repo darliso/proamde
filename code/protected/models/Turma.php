@@ -6,13 +6,12 @@
  * The followings are the available columns in table 'turma':
  * @property integer $id
  * @property integer $classe_id
- * @property integer $polo_id
+ * @property integer $periodo_id
  * @property string $nome
- * @property string $ano
  * @property integer $vagas
  *
  * The followings are the available model relations:
- * @property Polo $polo
+ * @property Periodo $periodo
  * @property Classe $classe
  * @property TurmaHasAluno[] $turmaHasAlunos
  */
@@ -34,12 +33,12 @@ class Turma extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('classe_id, polo_id, nome, ano, vagas', 'required'),
-			array('classe_id, polo_id, vagas', 'numerical', 'integerOnly'=>true),
+			array('classe_id, periodo_id, nome, vagas', 'required'),
+			array('classe_id, periodo_id, vagas', 'numerical', 'integerOnly'=>true),
 			array('nome', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, classe_id, polo_id, nome, ano, vagas', 'safe', 'on'=>'search'),
+			array('id, classe_id, periodo_id, nome, vagas', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,7 +50,7 @@ class Turma extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'polo' => array(self::BELONGS_TO, 'Polo', 'polo_id'),
+			'periodo' => array(self::BELONGS_TO, 'Periodo', 'periodo_id'),
 			'classe' => array(self::BELONGS_TO, 'Classe', 'classe_id'),
 			'turmaHasAlunos' => array(self::HAS_MANY, 'TurmaHasAluno', 'turma_int'),
 		);
@@ -65,9 +64,8 @@ class Turma extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'classe_id' => 'Classe',
-			'polo_id' => 'Polo',
+			'periodo_id' => 'Periodo',
 			'nome' => 'Nome',
-			'ano' => 'Ano',
 			'vagas' => 'Vagas',
 		);
 	}
@@ -92,9 +90,8 @@ class Turma extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('classe_id',$this->classe_id);
-		$criteria->compare('polo_id',$this->polo_id);
+		$criteria->compare('periodo_id',$this->periodo_id);
 		$criteria->compare('nome',$this->nome,true);
-		$criteria->compare('ano',$this->ano,true);
 		$criteria->compare('vagas',$this->vagas);
 
 		return new CActiveDataProvider($this, array(

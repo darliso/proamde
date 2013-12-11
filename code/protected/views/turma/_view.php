@@ -13,16 +13,12 @@
 	<?php echo CHtml::encode($data->classe_id); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('polo_id')); ?>:</b>
-	<?php echo CHtml::encode($data->polo_id); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('periodo_id')); ?>:</b>
+	<?php echo CHtml::encode($data->periodo_id); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('nome')); ?>:</b>
 	<?php echo CHtml::encode($data->nome); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('ano')); ?>:</b>
-	<?php echo CHtml::encode($data->ano); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('vagas')); ?>:</b>
